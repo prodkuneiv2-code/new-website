@@ -1,7 +1,3 @@
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-
-
 document.addEventListener('DOMContentLoaded', () => {
     // Navbar scroll effect
     const navbar = document.getElementById('navbar');
@@ -268,7 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         document.getElementById('checkoutItems').innerHTML = itemsHtml;
 
-        checkoutForm.addEventListener('submit', async (e) => {
+        checkoutForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
             const name = document.getElementById('custName').value;
@@ -276,59 +272,39 @@ document.addEventListener('DOMContentLoaded', () => {
             const email = document.getElementById('custEmail').value;
             const address = document.getElementById('custAddress').value;
 
-            // Config จาก Firebase
-            const firebaseConfig = {
-                apiKey: "AIzaSyCoxy7hh3zlmPdK2_0dgUB2XpYHKiTFtjc",
-                authDomain: "checkout-list-16546.firebaseapp.com",
-                projectId: "checkout-list-16546",
-                storageBucket: "checkout-list-16546.firebasestorage.app",
-                messagingSenderId: "93507686723",
-                appId: "1:93507686723:web:4324674842d52d9345dff6",
-                measurementId: "G-NSS9NE1FX0"
-            };
-            const app = initializeApp(firebaseConfig);
-            const analytics = getAnalytics(app);
-            if (typeof firebase !== 'undefined') {
-                const submitBtn = checkoutForm.querySelector('button[type="submit"]');
-                const originalText = submitBtn.innerText;
-                submitBtn.innerText = 'กำลังบันทึกข้อมูล...';
-                submitBtn.disabled = true;
+            // Build LINE message
+            let message = `🛒 *คำสั่งซื้อใหม่ (Raydee Solar)*\n`;
+            message += `------------------------\n`;
 
-                try {
-                    if (!firebase.apps.length) {
-                        firebase.initializeApp(firebaseConfig);
-                    }
-                    const db = firebase.firestore();
+            cart.forEach(item => {
+                message += `- ${item.name} (x${item.quantity}) : ฿${(item.price * item.quantity).toLocaleString()}\n`;
+            });
 
-                    const orderData = {
-                        customer: { name, phone, email, address },
-                        items: cart,
-                        totalAmount: total,
-                        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                        status: 'pending'
-                    };
+            message += `------------------------\n`;
+            message += `*ยอดรวมทั้งสิ้น:* ฿${total.toLocaleString()}\n\n`;
 
-                    // 2. บันทึกลง Collection ชื่อ 'orders'
-                    await db.collection("orders").add(orderData);
+            message += `👤 *ข้อมูลลูกค้า*\n`;
+            message += `ชื่อ: ${name}\n`;
+            message += `เบอร์โทร: ${phone}\n`;
+            if (email) message += `อีเมล: ${email}\n`;
+            message += `ที่อยู่: ${address}\n`;
 
-                    alert('สั่งซื้อสำเร็จ! ข้อมูลถูกส่งเข้า Database (Firebase) เรียบร้อยแล้ว');
-                    localStorage.removeItem('solarCart');
-                    window.location.href = 'index.html';
+            // Encode for URL
+            const encodedMessage = encodeURIComponent(message);
 
-                } catch (error) {
-                    console.error("Error saving to Firebase: ", error);
-                    alert('เกิดข้อผิดพลาด หรือยังไม่ได้ใส่การตั้งค่า Firebase ในไฟล์ script.js กลับไปแก้ไขโค้ดเพื่อใส่ข้อมูล Config ให้ถูกต้อง\n\nError: ' + error.message);
+            // Your LINE Official Account ID (replace with actual ID)
+            const lineId = "123456789";
 
-                    if (submitBtn) {
-                        submitBtn.innerText = originalText;
-                        submitBtn.disabled = false;
-                    }
-                }
-            } else {
-                alert('สั่งซื้อสำเร็จ! ขอบคุณที่ไว้วางใจ Raydee Solar (โหมดทดสอบ)');
-                localStorage.removeItem('solarCart');
+            // Redirect to LINE
+            const lineUrl = `https://line.me/R/ti/p/~${lineId}?text=${encodedMessage}`;
+            window.open(lineUrl, '_blank');
+
+            // Clear cart and redirect
+            localStorage.removeItem('solarCart');
+            showToast('ระบบกำลังนำคุณไปยัง LINE เพื่อยืนยันคำสั่งซื้อ!');
+            setTimeout(() => {
                 window.location.href = 'index.html';
-            }
+            }, 2000);
         });
     }
 });

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ชำระเงิน | Raydee Solar</title>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -15,6 +16,10 @@
             <a href="index.html" class="logo">Raydee<span>Solar</span></a>
             <ul class="nav-links">
                 <li><a href="index.html#home">หน้าแรก</a></li>
+                <li class="nav-social"><a href="https://www.facebook.com/profile.php?id=61578644667892"
+                        target="_blank"><i class="fab fa-facebook-square"></i> Facebook</a>
+                </li>
+                <li class="nav-social"><a href="#" target="_blank"><i class="fab fa-line"></i> LINE</a></li>
                 <li><a href="cart.html" class="cart-nav">🛒 ตะกร้า <span id="cart-count">0</span></a></li>
             </ul>
         </div>
@@ -50,8 +55,10 @@
                                 placeholder="ระบุที่อยู่ให้ละเอียด บ้านเลขที่ ซอย ถนน ตำบล อำเภอ จังหวัด และรหัสไปรษณีย์"
                                 required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-large"
-                            style="width:100%; margin-top:20px;">ยืนยันคำสั่งซื้อ</button>
+                        <button type="submit" class="btn btn-large"
+                            style="width:100%; margin-top:20px; background-color: #00B900; color: white; border: none;">
+                            <i class="fab fa-line" style="margin-right:8px;"></i> สั่งซื้อผ่าน LINE
+                        </button>
                     </form>
                 </div>
                 <div class="checkout-summary-wrap">
@@ -80,9 +87,16 @@
             </div>
         </div>
     </footer>
-    <!-- Firebase SDK (Compat Version) -->
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+
+    <!-- Floating Social Icons -->
+    <div class="floating-socials">
+        <a href="tel:0891234567" class="social-icon phone-icon" title="โทรเลย"><i class="fas fa-phone"></i></a>
+        <a href="#" class="social-icon line-icon" title="LINE"><i class="fab fa-line"></i></a>
+        <a href="https://www.facebook.com/profile.php?id=61578644667892" target="_blank"
+            class="social-icon messenger-icon" title="Messenger"><i class="fab fa-facebook-messenger"></i></a>
+        <a href="#" class="social-icon tiktok-icon" title="TikTok"><i class="fab fa-tiktok"></i></a>
+    </div>
+
     <script src="script.js"></script>
 </body>
 

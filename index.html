@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -23,6 +24,10 @@
                 <li><a href="index.html#about">เกี่ยวกับเรา</a></li>
                 <li><a href="index.html#products">สินค้า</a></li>
                 <li><a href="index.html#contact">ติดต่อเรา</a></li>
+                <li class="nav-social"><a href="https://www.facebook.com/profile.php?id=61578644667892"
+                        target="_blank"><i class="fab fa-facebook-square"></i> Facebook</a>
+                </li>
+                <li class="nav-social"><a href="#" target="_blank"><i class="fab fa-line"></i> LINE</a></li>
                 <li><a href="cart.html" class="cart-nav">🛒 ตะกร้า <span id="cart-count">0</span></a></li>
             </ul>
             <div class="hamburger">
@@ -40,13 +45,16 @@
                 alt="Solar panels on roof" class="bg-img">
             <div class="overlay"></div>
         </div>
-        <div class="container hero-content animate-fade-up">
-            <h1>เปลี่ยนพลังงานแสงอาทิตย์<br>ให้เป็นพลังงานของคุณ</h1>
-            <p>ลดค่าไฟและรักษาสิ่งแวดล้อมด้วยแผงโซล่าเซลล์ประสิทธิภาพสูงของเรา
-                ที่ออกแบบมาเพื่อให้เข้ากับบ้านและธุรกิจยุคใหม่</p>
-            <div class="hero-buttons">
-                <a href="#products" class="btn btn-primary">ดูสินค้าของเรา</a>
-                <a href="#contact" class="btn btn-outline">ปรึกษาฟรี</a>
+        <div class="container">
+            <div class="hero-content animate-fade-up">
+                <h1 style="word-break: keep-all; overflow-wrap: break-word;">
+                    เปลี่ยนพลังงานแสงอาทิตย์<br>ให้เป็นพลังงานของคุณ</h1>
+                <p>ลดค่าไฟและรักษาสิ่งแวดล้อมด้วยแผงโซล่าเซลล์ประสิทธิภาพสูงของเรา
+                    ที่ออกแบบมาเพื่อให้เข้ากับบ้านและธุรกิจยุคใหม่</p>
+                <div class="hero-buttons">
+                    <a href="#products" class="btn btn-primary">ดูสินค้าของเรา</a>
+                    <a href="#contact" class="btn btn-outline">ปรึกษาฟรี</a>
+                </div>
             </div>
         </div>
     </section>
@@ -227,7 +235,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <a href="#" class="logo">Raydee<span>Solar.</span></a>
+                    <a href="#" class="logo">Raydee<span>Solar</span></a>
                     <p class="footer-text">ผู้นำด้านเทคโนโลยีพลังงานแสงอาทิตย์
                         ให้บริการครบวงจรตั้งแต่ให้คำปรึกษาจนถึงติดตั้งและบำรุงรักษา</p>
                 </div>
@@ -263,6 +271,15 @@
             </div>
         </div>
     </footer>
+
+    <!-- Floating Social Icons -->
+    <div class="floating-socials">
+        <a href="tel:0891234567" class="social-icon phone-icon" title="โทรเลย"><i class="fas fa-phone"></i></a>
+        <a href="#" class="social-icon line-icon" title="LINE"><i class="fab fa-line"></i></a>
+        <a href="https://www.facebook.com/profile.php?id=61578644667892" target="_blank"
+            class="social-icon messenger-icon" title="Messenger"><i class="fab fa-facebook-messenger"></i></a>
+        <a href="#" class="social-icon tiktok-icon" title="TikTok"><i class="fab fa-tiktok"></i></a>
+    </div>
 
     <!-- To Top Button -->
     <button class="to-top-btn" id="toTopBtn">↑</button>

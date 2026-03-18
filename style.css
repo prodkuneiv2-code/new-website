@@ -650,6 +650,15 @@ ul {
     .nav-content {
         display: flex;
         justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        margin-left: 0;
+    }
+
+    .hero-content {
+        padding-right: 40px;
     }
 
     .hamburger {
@@ -709,7 +718,7 @@ ul {
     }
 
     .hero-content h1 {
-        font-size: 2.2rem;
+        font-size: 1.8rem;
     }
 
     .hero-buttons {
@@ -1071,13 +1080,13 @@ ul {
 
 @media (max-width: 768px) {
     .floating-socials {
-        right: 15px;
-        gap: 10px;
+        right: 10px;
+        gap: 8px;
     }
 
     .social-icon {
-        width: 45px;
-        height: 45px;
-        font-size: 20px;
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
     }
 }

@@ -264,47 +264,91 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         document.getElementById('checkoutItems').innerHTML = itemsHtml;
 
-        checkoutForm.addEventListener('submit', (e) => {
+        checkoutForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+
+            const submitBtn = document.getElementById('submitBtn');
+            const originalBtnHtml = submitBtn.innerHTML;
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right:8px;"></i> กำลังดำเนินการ...';
 
             const name = document.getElementById('custName').value;
             const phone = document.getElementById('custPhone').value;
             const email = document.getElementById('custEmail').value;
             const address = document.getElementById('custAddress').value;
 
-            // Build LINE message
-            let message = `🛒 *คำสั่งซื้อใหม่ (Raydee Solar)*\n`;
-            message += `------------------------\n`;
-
+            // Prepare order summary string
+            let orderSummary = "";
             cart.forEach(item => {
-                message += `- ${item.name} (x${item.quantity}) : ฿${(item.price * item.quantity).toLocaleString()}\n`;
+                orderSummary += `${item.name} (x${item.quantity}) - ฿${(item.price * item.quantity).toLocaleString()}\n`;
             });
 
-            message += `------------------------\n`;
-            message += `*ยอดรวมทั้งสิ้น:* ฿${total.toLocaleString()}\n\n`;
+            const formData = new FormData();
+            formData.append('name', name);
+            formData.append('phone', phone);
+            formData.append('email', email);
+            formData.append('address', address);
+            formData.append('orderSummary', orderSummary);
+            formData.append('total', total);
+            formData.append('timestamp', new Date().toLocaleString());
 
-            message += `👤 *ข้อมูลลูกค้า*\n`;
-            message += `ชื่อ: ${name}\n`;
-            message += `เบอร์โทร: ${phone}\n`;
-            if (email) message += `อีเมล: ${email}\n`;
-            message += `ที่อยู่: ${address}\n`;
+            // TODO: วาง Web App URL ที่ได้จาก Google Apps Script ของคุณที่นี่
+            const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzEfzCCtZwbRfOONGuxWZI3JSENmmILZG_dacaZDC2BbmReSgnDRgCLmldRdHfdMHPD/exec";
 
-            // Encode for URL
-            const encodedMessage = encodeURIComponent(message);
+            try {
+                // If URL is not set, we just simulate success for demo
+                if (SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbzEfzCCtZwbRfOONGuxWZI3JSENmmILZG_dacaZDC2BbmReSgnDRgCLmldRdHfdMHPD/exec') {
+                    console.log('ข้อมูลที่จำลองส่งไปยัง Google Sheets:', Object.fromEntries(formData));
+                    await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate network request
+                } else {
+                    await fetch(SCRIPT_URL, {
+                        method: 'POST',
+                        body: formData
+                    });
+                }
 
-            // Your LINE Official Account ID (replace with actual ID)
-            const lineId = "123456789";
+                // Build LINE message
+                let message = `🛒 *คำสั่งซื้อใหม่ (Raydee Solar)*\n`;
+                message += `------------------------\n`;
 
-            // Redirect to LINE
-            const lineUrl = `https://line.me/R/ti/p/~${lineId}?text=${encodedMessage}`;
-            window.open(lineUrl, '_blank');
+                cart.forEach(item => {
+                    message += `- ${item.name} (x${item.quantity}) : ฿${(item.price * item.quantity).toLocaleString()}\n`;
+                });
 
-            // Clear cart and redirect
-            localStorage.removeItem('solarCart');
-            showToast('ระบบกำลังนำคุณไปยัง LINE เพื่อยืนยันคำสั่งซื้อ!');
-            setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 2000);
+                message += `------------------------\n`;
+                message += `*ยอดรวมทั้งสิ้น:* ฿${total.toLocaleString()}\n\n`;
+
+                message += `👤 *ข้อมูลลูกค้า*\n`;
+                message += `ชื่อ: ${name}\n`;
+                message += `เบอร์โทร: ${phone}\n`;
+                if (email) message += `อีเมล: ${email}\n`;
+                message += `ที่อยู่: ${address}\n`;
+
+                // Encode for URL
+                const encodedMessage = encodeURIComponent(message);
+
+                // Your LINE Official Account ID (replace with actual ID)
+                const lineId = "123456789";
+
+                // Redirect to LINE
+                const lineUrl = `https://line.me/R/ti/p/~${lineId}?text=${encodedMessage}`;
+                window.open(lineUrl, '_blank');
+
+                // Clear cart and redirect
+                localStorage.removeItem('solarCart');
+                showToast('ส่งข้อมูลและกำลังไปที่ LINE เพื่อยืนยันคำสั่งซื้อ!');
+
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+
+            } catch (error) {
+                console.error('Error!', error.message);
+                showToast('เกิดข้อผิดพลาดในการส่งคำสั่งซื้อ กรุณาลองใหม่อีกครั้ง');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnHtml;
+            }
         });
     }
 });

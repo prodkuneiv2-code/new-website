@@ -297,16 +297,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzEfzCCtZwbRfOONGuxWZI3JSENmmILZG_dacaZDC2BbmReSgnDRgCLmldRdHfdMHPD/exec";
 
             try {
-                // If URL is not set, we just simulate success for demo
-                if (SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbzEfzCCtZwbRfOONGuxWZI3JSENmmILZG_dacaZDC2BbmReSgnDRgCLmldRdHfdMHPD/exec') {
-                    console.log('ข้อมูลที่จำลองส่งไปยัง Google Sheets:', Object.fromEntries(formData));
-                    await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate network request
-                } else {
-                    await fetch(SCRIPT_URL, {
-                        method: 'POST',
-                        body: formData
-                    });
-                }
+                // ส่งข้อมูลไปยัง Google Apps Script
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // ใส่เพื่อป้องกันปัญหา CORS ตอนยิงตรงไปที่ Google
+                    body: formData
+                });
 
                 // Build LINE message
                 let message = `🛒 *คำสั่งซื้อใหม่ (Raydee Solar)*\n`;

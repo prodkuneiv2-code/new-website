@@ -284,7 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 orderSummary += `${item.name} (x${item.quantity}) - ฿${(item.price * item.quantity).toLocaleString()}\n`;
             });
 
-            const formData = new FormData();
+            const formData = new URLSearchParams();
             formData.append('name', name);
             formData.append('phone', phone);
             formData.append('email', email);
@@ -293,15 +293,17 @@ document.addEventListener('DOMContentLoaded', () => {
             formData.append('total', total);
             formData.append('timestamp', new Date().toLocaleString());
 
-            // TODO: วาง Web App URL ที่ได้จาก Google Apps Script ของคุณที่นี่
-            const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzEfzCCtZwbRfOONGuxWZI3JSENmmILZG_dacaZDC2BbmReSgnDRgCLmldRdHfdMHPD/exec";
+            const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwvFnqlsJoYrxMXagFfN2JH3ZJlaacqX320HDkijPQFHn7A_5xGMrTpfKGkOb5ePpVA/exec";
 
             try {
                 // ส่งข้อมูลไปยัง Google Apps Script
                 await fetch(SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors', // ใส่เพื่อป้องกันปัญหา CORS ตอนยิงตรงไปที่ Google
-                    body: formData
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: formData.toString()
                 });
 
                 // Build LINE message

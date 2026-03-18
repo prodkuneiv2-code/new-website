@@ -32,19 +32,21 @@
                     <form id="checkoutForm" style="margin-top:20px;">
                         <div class="form-group">
                             <label>ชื่อ-นามสกุล</label>
-                            <input type="text" class="form-control" placeholder="ระบุชื่อจริงและนามสกุล" required>
+                            <input type="text" id="custName" class="form-control" placeholder="ระบุชื่อจริงและนามสกุล"
+                                required>
                         </div>
                         <div class="form-group">
                             <label>เบอร์โทรศัพท์</label>
-                            <input type="tel" class="form-control" placeholder="เช่น 0891234567" required>
+                            <input type="tel" id="custPhone" class="form-control" placeholder="เช่น 0891234567"
+                                required>
                         </div>
                         <div class="form-group">
                             <label>อีเมล (ถ้ามี)</label>
-                            <input type="email" class="form-control" placeholder="example@email.com">
+                            <input type="email" id="custEmail" class="form-control" placeholder="example@email.com">
                         </div>
                         <div class="form-group">
                             <label>ที่อยู่การจัดส่ง / ติดตั้ง</label>
-                            <textarea class="form-control" rows="4"
+                            <textarea id="custAddress" class="form-control" rows="4"
                                 placeholder="ระบุที่อยู่ให้ละเอียด บ้านเลขที่ ซอย ถนน ตำบล อำเภอ จังหวัด และรหัสไปรษณีย์"
                                 required></textarea>
                         </div>
@@ -78,6 +80,9 @@
             </div>
         </div>
     </footer>
+    <!-- Firebase SDK (Compat Version) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
     <script src="script.js"></script>
 </body>
 

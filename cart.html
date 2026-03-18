@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ตะกร้าสินค้า | Raydee Solar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navbar scrolled" id="navbar">
+        <div class="container nav-content">
+            <a href="index.html" class="logo">Raydee<span>Solar</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html#home">หน้าแรก</a></li>
+                <li><a href="index.html#products">สินค้า</a></li>
+                <li><a href="cart.html" class="cart-nav">🛒 ตะกร้า <span id="cart-count">0</span></a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="page-header">
+        <div class="container">
+            <h1>ตะกร้าสินค้าของคุณ</h1>
+        </div>
+    </div>
+    <section class="section-padding" style="flex: 1;">
+        <div class="container">
+            <div class="checkout-grid" style="display:block;">
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th>สินค้า</th>
+                            <th>ราคา</th>
+                            <th>จำนวน</th>
+                            <th>รวม</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="cartItems">
+                        <!-- Items rendered by JS -->
+                    </tbody>
+                </table>
+                <div class="cart-summary" style="margin-left:auto; margin-top:20px;">
+                    <div class="summary-row summary-total">
+                        <span>ยอดรวมทั้งสิ้น:</span>
+                        <span id="cartTotal">฿0</span>
+                    </div>
+                    <a href="checkout.html" id="checkoutBtn" class="btn btn-primary"
+                        style="width:100%; display:block; margin-top:20px;">ดำเนินการชำระเงิน</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer" style="padding: 40px 0 20px;">
+        <div class="container">
+            <div class="footer-bottom" style="margin-top:0;">
+                <p>&copy; 2026 RaydeeSolar. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>

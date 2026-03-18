@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raydee Solar | แผงโซล่าเซลล์คุณภาพสูง</title>
+    <meta name="description"
+        content="จำหน่ายและติดตั้งแผงโซล่าเซลล์ที่ทันสมัยและมีประสิทธิภาพสูง สำหรับบ้านและธุรกิจของคุณ">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo">Raydee<span>Solar</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html#home">หน้าแรก</a></li>
+                <li><a href="index.html#about">เกี่ยวกับเรา</a></li>
+                <li><a href="index.html#products">สินค้า</a></li>
+                <li><a href="index.html#contact">ติดต่อเรา</a></li>
+                <li><a href="cart.html" class="cart-nav">🛒 ตะกร้า <span id="cart-count">0</span></a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-bg">
+            <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=2072&auto=format&fit=crop"
+                alt="Solar panels on roof" class="bg-img">
+            <div class="overlay"></div>
+        </div>
+        <div class="container hero-content animate-fade-up">
+            <h1>เปลี่ยนพลังงานแสงอาทิตย์<br>ให้เป็นพลังงานของคุณ</h1>
+            <p>ลดค่าไฟและรักษาสิ่งแวดล้อมด้วยแผงโซล่าเซลล์ประสิทธิภาพสูงของเรา
+                ที่ออกแบบมาเพื่อให้เข้ากับบ้านและธุรกิจยุคใหม่</p>
+            <div class="hero-buttons">
+                <a href="#products" class="btn btn-primary">ดูสินค้าของเรา</a>
+                <a href="#contact" class="btn btn-outline">ปรึกษาฟรี</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="about" class="features section-padding">
+        <div class="container">
+            <div class="section-title text-center animate-fade-up">
+                <h2>ทำไมต้องเลือกเรา?</h2>
+                <p>นวัตกรรมล่าสุดเพื่อประสิทธิภาพที่ดีที่สุดสำหรับคุณ</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card animate-fade-up" style="animation-delay: 0.1s;">
+                    <div class="icon">☀️</div>
+                    <h3>ประสิทธิภาพสูง</h3>
+                    <p>รับพลังงานแสงอาทิตย์ได้สูงสุดแม้ในวันที่แดดอ่อน ด้วยเทคโนโลยีขั้นสูง</p>
+                </div>
+                <div class="feature-card animate-fade-up" style="animation-delay: 0.2s;">
+                    <div class="icon">🛡️</div>
+                    <h3>ทนทานยาวนาน</h3>
+                    <p>วัสดุเกรดพรีเมียม ทนทานต่อทุกสภาพอากาศ รับประกันยาวนาน 25 ปี</p>
+                </div>
+                <div class="feature-card animate-fade-up" style="animation-delay: 0.3s;">
+                    <div class="icon">💰</div>
+                    <h3>คุ้มค่าการลงทุน</h3>
+                    <p>จุดคุ้มทุนเร็ว ช่วยลดค่าไฟได้สูงสุดถึง 70% ต่อเดือนในระยะยาว</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio section-padding">
+        <div class="container text-center animate-fade-up">
+            <div class="section-title">
+                <h2>ผลงานของเรา</h2>
+                <p>ตัวอย่างการติดตั้งแผงโซล่าเซลล์จากลูกค้าที่ไว้วางใจเรา</p>
+            </div>
+            <div class="slider-container">
+                <div class="slider-wrapper" id="portfolioSlider">
+                    <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=800&auto=format&fit=crop"
+                        class="slide active" alt="ผลงานการติดตั้ง 1">
+                    <img src="https://images.unsplash.com/photo-1592833159155-c62df1b65634?w=800&auto=format&fit=crop"
+                        class="slide" alt="ผลงานการติดตั้ง 2">
+                    <img src="https://images.unsplash.com/photo-1620241608701-94ef138c7ea9?w=800&auto=format&fit=crop"
+                        class="slide" alt="ผลงานการติดตั้ง 3">
+                </div>
+                <div class="slider-dots" id="sliderDots"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products section-padding">
+        <div class="container">
+            <div class="section-title text-center animate-fade-up">
+                <h2>ผลิตภัณฑ์ของเรา</h2>
+                <p>เลือกผลิตภัณฑ์ที่เหมาะกับความต้องการของคุณ</p>
+            </div>
+
+            <!-- Category Filter Buttons -->
+            <div class="product-filters text-center animate-fade-up">
+                <button class="filter-btn active" data-filter="all">ทั้งหมด</button>
+                <button class="filter-btn" data-filter="panel">แผงโซล่าเซลล์</button>
+                <button class="filter-btn" data-filter="inverter">อินเวอร์เตอร์</button>
+                <button class="filter-btn" data-filter="pump">ปั้มน้ำโซล่าเซลล์</button>
+            </div>
+
+            <div class="product-grid" id="productGrid">
+                <!-- Product 1 -->
+                <div class="product-card animate-fade-up category-item" data-category="panel"
+                    style="animation-delay: 0.1s;">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1592833159155-c62df1b65634?q=80&w=800&auto=format&fit=crop"
+                            alt="Monocrystalline Panel">
+                        <span class="badge">ขายดี</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>MonoX Plus 550W</h3>
+                        <p class="description">แผงโมโนคริสตัลไลน์ประสิทธิภาพสูง เหมาะสำหรับหลังคามีพื้นที่จำกัด</p>
+                        <ul class="specs">
+                            <li>✓ ประสิทธิภาพ 21.3%</li>
+                            <li>✓ รับประกันสินค้า 12 ปี</li>
+                        </ul>
+                        <div class="price-action">
+                            <span class="price">฿ 4,900</span>
+                            <button class="btn btn-sm btn-primary add-to-cart-btn" data-id="1"
+                                data-name="MonoX Plus 550W" data-price="4900"
+                                data-img="https://images.unsplash.com/photo-1592833159155-c62df1b65634?q=80&w=200&auto=format&fit=crop">หยิบใส่ตะกร้า</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card animate-fade-up category-item" data-category="panel"
+                    style="animation-delay: 0.2s;">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1620241608701-94ef138c7ea9?q=80&w=800&auto=format&fit=crop"
+                            alt="Polycrystalline Panel">
+                    </div>
+                    <div class="product-info">
+                        <h3>PolyEco 450W</h3>
+                        <p class="description">แผงโพลีคริสตัลไลน์คุ้มราคา ประสิทธิภาพเสถียร เหมาะกับทุกสภาพอากาศ</p>
+                        <ul class="specs">
+                            <li>✓ ประสิทธิภาพ 19.5%</li>
+                            <li>✓ รับประกันสินค้า 10 ปี</li>
+                        </ul>
+                        <div class="price-action">
+                            <span class="price">฿ 3,500</span>
+                            <button class="btn btn-sm btn-primary add-to-cart-btn" data-id="2" data-name="PolyEco 450W"
+                                data-price="3500"
+                                data-img="https://images.unsplash.com/photo-1620241608701-94ef138c7ea9?q=80&w=200&auto=format&fit=crop">หยิบใส่ตะกร้า</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card animate-fade-up category-item" data-category="inverter"
+                    style="animation-delay: 0.3s;">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1559302504-64aae6ca6b6f?q=80&w=800&auto=format&fit=crop"
+                            alt="Solar Inverter">
+                        <span class="badge badge-new">ใหม่</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Smart Inverter 5kW</h3>
+                        <p class="description">อินเวอร์เตอร์ระบบไฮบริดอัจฉริยะ รองรับแบตเตอรี่และเชื่อมต่อแอพได้</p>
+                        <ul class="specs">
+                            <li>✓ จ่ายไฟนิ่ง เสถียร</li>
+                            <li>✓ ตรวจสอบการทำงานผ่านมือถือ</li>
+                        </ul>
+                        <div class="price-action">
+                            <span class="price">฿ 25,000</span>
+                            <button class="btn btn-sm btn-primary add-to-cart-btn" data-id="3"
+                                data-name="Smart Inverter 5kW" data-price="25000"
+                                data-img="https://images.unsplash.com/photo-1559302504-64aae6ca6b6f?q=80&w=200&auto=format&fit=crop">หยิบใส่ตะกร้า</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4: Water Pump -->
+                <div class="product-card animate-fade-up category-item" data-category="pump"
+                    style="animation-delay: 0.4s;">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1579401734062-87a1d13b4c97?q=80&w=800&auto=format&fit=crop"
+                            alt="Solar Water Pump">
+                    </div>
+                    <div class="product-info">
+                        <h3>Solar Water Pump 2HP</h3>
+                        <p class="description">ปั๊มน้ำบาดาลโซล่าเซลล์ ประหยัดพลังงาน สูบน้ำได้ลึก ทนทานสูง</p>
+                        <ul class="specs">
+                            <li>✓ กำลังไฟ 1500W</li>
+                            <li>✓ ปริมาณน้ำสูงสุด 6 คิว/ชม.</li>
+                        </ul>
+                        <div class="price-action">
+                            <span class="price">฿ 12,000</span>
+                            <button class="btn btn-sm btn-primary add-to-cart-btn" data-id="4"
+                                data-name="Solar Water Pump 2HP" data-price="12000"
+                                data-img="https://images.unsplash.com/photo-1579401734062-87a1d13b4c97?q=80&w=200&auto=format&fit=crop">หยิบใส่ตะกร้า</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta section-padding blur-bg">
+        <div class="container text-center animate-fade-up">
+            <h2>พร้อมที่จะเปลี่ยนมาใช้พลังงานสะอาดหรือยัง?</h2>
+            <p>ทีมงานผู้เชี่ยวชาญของเราพร้อมให้คำปรึกษาและประเมินพื้นที่ฟรี</p>
+            <a href="#contact" class="btn btn-primary btn-large">ติดต่อประเมินหน้างานฟรี</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="logo">Raydee<span>Solar.</span></a>
+                    <p class="footer-text">ผู้นำด้านเทคโนโลยีพลังงานแสงอาทิตย์
+                        ให้บริการครบวงจรตั้งแต่ให้คำปรึกษาจนถึงติดตั้งและบำรุงรักษา</p>
+                </div>
+                <div class="footer-col">
+                    <h4>ลิงก์ด่วน</h4>
+                    <ul>
+                        <li><a href="#home">หน้าแรก</a></li>
+                        <li><a href="#about">เกี่ยวกับเรา</a></li>
+                        <li><a href="#products">สินค้าและการบริการ</a></li>
+                        <li><a href="#">บทความให้ความรู้</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>ติดต่อเรา</h4>
+                    <ul class="contact-info">
+                        <li>📍 123 ถนนสุขุมวิท, กรุงเทพฯ 10110</li>
+                        <li>📞 02-XXX-XXXX</li>
+                        <li>✉️ contact@solartech.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 RaydeeSolar. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- To Top Button -->
+    <button class="to-top-btn" id="toTopBtn">↑</button>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

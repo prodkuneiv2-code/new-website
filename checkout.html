@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ชำระเงิน | Raydee Solar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body style="display: flex; flex-direction: column; min-height: 100vh;">
+    <nav class="navbar scrolled" id="navbar">
+        <div class="container nav-content">
+            <a href="index.html" class="logo">Raydee<span>Solar</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html#home">หน้าแรก</a></li>
+                <li><a href="cart.html" class="cart-nav">🛒 ตะกร้า <span id="cart-count">0</span></a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="page-header">
+        <div class="container">
+            <h1>รายละเอียดการชำระเงิน</h1>
+        </div>
+    </div>
+    <section class="section-padding" style="flex: 1;">
+        <div class="container">
+            <div class="checkout-grid">
+                <div class="checkout-form">
+                    <h3>ข้อมูลการจัดส่ง / ติดตั้ง</h3>
+                    <form id="checkoutForm" style="margin-top:20px;">
+                        <div class="form-group">
+                            <label>ชื่อ-นามสกุล</label>
+                            <input type="text" class="form-control" placeholder="ระบุชื่อจริงและนามสกุล" required>
+                        </div>
+                        <div class="form-group">
+                            <label>เบอร์โทรศัพท์</label>
+                            <input type="tel" class="form-control" placeholder="เช่น 0891234567" required>
+                        </div>
+                        <div class="form-group">
+                            <label>อีเมล (ถ้ามี)</label>
+                            <input type="email" class="form-control" placeholder="example@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label>ที่อยู่การจัดส่ง / ติดตั้ง</label>
+                            <textarea class="form-control" rows="4"
+                                placeholder="ระบุที่อยู่ให้ละเอียด บ้านเลขที่ ซอย ถนน ตำบล อำเภอ จังหวัด และรหัสไปรษณีย์"
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-large"
+                            style="width:100%; margin-top:20px;">ยืนยันคำสั่งซื้อ</button>
+                    </form>
+                </div>
+                <div class="checkout-summary-wrap">
+                    <div class="cart-summary" style="margin:0; position: sticky; top: 100px;">
+                        <h3>สรุปคำสั่งซื้อ</h3>
+                        <hr style="margin:15px 0; border:0; border-top:1px solid var(--border-color);">
+                        <div id="checkoutItems" style="margin-bottom:20px; font-size:0.95rem;">
+                            <!-- Items from local storage -->
+                        </div>
+                        <div class="summary-row summary-total">
+                            <span>ยอดชำระสุทธิ:</span>
+                            <span id="checkoutTotal">฿0</span>
+                        </div>
+                        <div style="margin-top: 20px; text-align:center; font-size: 0.85rem; color: var(--text-muted);">
+                            <p>🔒 ข้อมูลการชำระเงินของคุณปลอดภัย</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer" style="padding: 40px 0 20px;">
+        <div class="container">
+            <div class="footer-bottom" style="margin-top:0;">
+                <p>&copy; 2026 RaydeeSolar. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>

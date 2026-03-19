@@ -284,7 +284,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 orderSummary += `${item.name} (x${item.quantity}) - ฿${(item.price * item.quantity).toLocaleString()}\n`;
             });
 
+            // สร้างเลข Tracking ID
+            const datePart = new Date().toISOString().slice(2, 10).replace(/-/g, ''); // YYMMDD
+            const randomPart = Math.random().toString(36).substring(2, 6).toUpperCase();
+            const trackingId = `RS${datePart}-${randomPart}`;
+
             const formData = new URLSearchParams();
+            formData.append('trackingId', trackingId); // ส่ง Tracking ID เข้าไปด้วย
             formData.append('name', name);
             formData.append('phone', phone);
             formData.append('email', email);
@@ -293,7 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
             formData.append('total', total);
             formData.append('timestamp', new Date().toLocaleString());
 
-            const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwvFnqlsJoYrxMXagFfN2JH3ZJlaacqX320HDkijPQFHn7A_5xGMrTpfKGkOb5ePpVA/exec";
+            const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzXM7VAjunXdPBFGOdIkBYijlsGFSyfHqFv0-3reV5PWEavNFvPaWtuEWuHpwo7WWJl/exec";
 
             try {
                 // ส่งข้อมูลไปยัง Google Apps Script
@@ -306,40 +312,56 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: formData.toString()
                 });
 
-                // Build LINE message
-                let message = `🛒 *คำสั่งซื้อใหม่ (Raydee Solar)*\n`;
-                message += `------------------------\n`;
+                // สร้าง Modal Popup แสดงเลขติดตามสถานะ
+                const modalHtml = `
+                    <div id="successModal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; z-index:9999; opacity:0; transition:opacity 0.3s ease;">
+                        <div style="background:white; padding:40px; border-radius:12px; text-align:center; max-width:400px; width:90%; box-shadow: 0 10px 25px rgba(0,0,0,0.2); transform:translateY(20px); transition:transform 0.3s ease;" id="successModalBody">
+                            <i class="fas fa-check-circle" style="font-size:4rem; color:#00B900; margin-bottom:20px;"></i>
+                            <h2 style="margin-bottom:15px; color:#333; font-family:'Prompt', sans-serif;">สั่งซื้อสินค้าสำเร็จ!</h2>
+                            <p style="margin-bottom:20px; color:#666; font-size:1rem;">ระบบได้รับข้อมูลคำสั่งซื้อเรียบร้อยแล้ว<br>นี่คือเลขติดตามสถานะของคุณ:</p>
+                            
+                            <div style="background:#f8fafc; padding:15px; border-radius:8px; font-size:1.6rem; font-weight:bold; letter-spacing:2px; color:var(--primary-color); margin-bottom:20px; border: 2px dashed #cbd5e1;">
+                                ${trackingId}
+                            </div>
+                            
+                            <p style="font-size:0.9rem; color:#64748b; margin-bottom:25px;">
+                                กดยืนยันเพื่อไปหน้า Line แชท ให้นำเลขติดตามสถานะแจ้งแอดมินหรือพิมพ์ถามบอทเพื่อติดตามสถานะได้เลย
+                            </p>
+                            
+                            <div style="display:flex; flex-direction:column; gap:10px;">
+                                <button id="copyTrackBtn" class="btn btn-outline" style="color:var(--primary-color); border-color:var(--primary-color); width:100%;">
+                                    <i class="fas fa-copy"></i> คัดลอกเลขติดตามสถานะ
+                                </button>
+                                <button id="goToLineBtn" class="btn btn-primary" style="width:100%; background-color:#00B900; border-color:#00B900;">
+                                    <i class="fab fa-line"></i> ติดต่อ LINE OA
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
 
-                cart.forEach(item => {
-                    message += `- ${item.name} (x${item.quantity}) : ฿${(item.price * item.quantity).toLocaleString()}\n`;
+                document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+                // Animate entrance
+                setTimeout(() => {
+                    document.getElementById('successModal').style.opacity = '1';
+                    document.getElementById('successModalBody').style.transform = 'translateY(0)';
+                }, 10);
+
+                // Add Event Listeners to Buttons
+                document.getElementById('copyTrackBtn').addEventListener('click', () => {
+                    navigator.clipboard.writeText(trackingId);
+                    showToast('คัดลอกเลขติดตามสถานะเรียบร้อย!');
                 });
 
-                message += `------------------------\n`;
-                message += `*ยอดรวมทั้งสิ้น:* ฿${total.toLocaleString()}\n\n`;
+                document.getElementById('goToLineBtn').addEventListener('click', () => {
+                    // เปิดหน้า LINE OA และกลับสู่หน้าแรก
+                    const lineId = "123456789";
+                    window.open(`https://line.me/R/ti/p/~${lineId}`, '_blank');
 
-                message += `👤 *ข้อมูลลูกค้า*\n`;
-                message += `ชื่อ: ${name}\n`;
-                message += `เบอร์โทร: ${phone}\n`;
-                if (email) message += `อีเมล: ${email}\n`;
-                message += `ที่อยู่: ${address}\n`;
-
-                // Encode for URL
-                const encodedMessage = encodeURIComponent(message);
-
-                // Your LINE Official Account ID (replace with actual ID)
-                const lineId = "123456789";
-
-                // Redirect to LINE
-                const lineUrl = `https://line.me/R/ti/p/~${lineId}?text=${encodedMessage}`;
-                window.open(lineUrl, '_blank');
-
-                // Clear cart and redirect
-                localStorage.removeItem('solarCart');
-                showToast('ส่งข้อมูลและกำลังไปที่ LINE เพื่อยืนยันคำสั่งซื้อ!');
-
-                setTimeout(() => {
+                    localStorage.removeItem('solarCart');
                     window.location.href = 'index.html';
-                }, 2000);
+                });
 
             } catch (error) {
                 console.error('Error!', error.message);

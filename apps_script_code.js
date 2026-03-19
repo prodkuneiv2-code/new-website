@@ -22,6 +22,7 @@ function doPost(e) {
     // ตั้งค่าหัวตาราง (Headers) หากหน้าชีทยังว่างเปล่า
     if (sheet.getLastRow() === 0) {
       sheet.appendRow([
+        'เลขพัสดุ (Tracking ID)',
         'วันที่และเวลา',
         'ชื่อ-นามสกุล',
         'เบอร์โทร',
@@ -31,17 +32,19 @@ function doPost(e) {
         'ยอดรวม (บาท)'
       ]);
       // ปรับแต่งหน้าตาตารางเล็กน้อย
-      sheet.getRange('A1:G1').setFontWeight('bold').setBackground('#efefef');
+      sheet.getRange('A1:H1').setFontWeight('bold').setBackground('#efefef');
       sheet.setColumnWidth(1, 150);
       sheet.setColumnWidth(2, 150);
-      sheet.setColumnWidth(3, 120);
-      sheet.setColumnWidth(4, 180);
-      sheet.setColumnWidth(5, 300);
+      sheet.setColumnWidth(3, 150);
+      sheet.setColumnWidth(4, 120);
+      sheet.setColumnWidth(5, 180);
       sheet.setColumnWidth(6, 300);
-      sheet.setColumnWidth(7, 100);
+      sheet.setColumnWidth(7, 300);
+      sheet.setColumnWidth(8, 100);
     }
 
     // ดึงข้อมูลที่ส่งมาจากหน้าฟอร์มที่ฝั่งเว็บ
+    const trackingId = e.parameter.trackingId || '-';
     const timestamp = e.parameter.timestamp || new Date().toLocaleString();
     const name = e.parameter.name || '-';
     const phone = e.parameter.phone || '-';
@@ -52,6 +55,7 @@ function doPost(e) {
 
     // เพิ่มข้อมูลลงในแถวใหม่
     sheet.appendRow([
+      trackingId,
       timestamp,
       name,
       phone,

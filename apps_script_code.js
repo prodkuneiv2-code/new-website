@@ -13,21 +13,21 @@
 11. นำ URL นั้นไปใส่ในไฟล์ script.js บรรทัดที่เขียนว่า "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL"
 */
 
-const SHEET_NAME = 'Sheet1'; // ชื่อ Sheet ใน Google Sheets หากเปลี่ยนชื่อต้องแก้ตรงนี้ด้วย
+const SHEET_NAME = 'database'; // ชื่อ Sheet ใน Google Sheets หากเปลี่ยนชื่อต้องแก้ตรงนี้ด้วย
 
 function doPost(e) {
   try {
     const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
-    
+
     // ตั้งค่าหัวตาราง (Headers) หากหน้าชีทยังว่างเปล่า
     if (sheet.getLastRow() === 0) {
       sheet.appendRow([
-        'วันที่และเวลา', 
-        'ชื่อ-นามสกุล', 
-        'เบอร์โทร', 
-        'อีเมล', 
-        'ที่อยู่', 
-        'รายละเอียดสินค้า', 
+        'วันที่และเวลา',
+        'ชื่อ-นามสกุล',
+        'เบอร์โทร',
+        'อีเมล',
+        'ที่อยู่',
+        'รายละเอียดสินค้า',
         'ยอดรวม (บาท)'
       ]);
       // ปรับแต่งหน้าตาตารางเล็กน้อย

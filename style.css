@@ -824,6 +824,19 @@ ul {
     text-align: center;
 }
 
+.page-header h1 {
+    color: var(--white);
+}
+
+@media (max-width: 768px) {
+    .page-header {
+        padding: 100px 0 40px;
+    }
+    .page-header h1 {
+        font-size: 1.8rem;
+    }
+}
+
 .cart-table {
     width: 100%;
     border-collapse: collapse;

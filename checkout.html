@@ -19,7 +19,8 @@
                 <li class="nav-social"><a href="https://www.facebook.com/profile.php?id=61578644667892"
                         target="_blank"><i class="fab fa-facebook-square"></i> Facebook</a>
                 </li>
-                <li class="nav-social"><a href="#" target="_blank"><i class="fab fa-line"></i> LINE</a></li>
+                <li class="nav-social"><a href="https://line.me/R/ti/p/@312ntoyv" target="_blank"><i
+                            class="fab fa-line"></i> LINE</a></li>
                 <li><a href="cart.html" class="cart-nav">🛒 ตะกร้า <span id="cart-count">0</span></a></li>
             </ul>
         </div>
@@ -31,19 +32,21 @@
     </div>
     <section class="section-padding" style="flex: 1;">
         <div class="container">
-            <div class="checkout-grid">
-                <div class="checkout-form">
+            <div class="cart-modern-layout">
+                <div class="checkout-form-container">
                     <h3>ข้อมูลการจัดส่ง / ติดตั้ง</h3>
                     <form id="checkoutForm" style="margin-top:20px;">
                         <div class="form-group">
                             <label>ชื่อ-นามสกุล</label>
                             <input type="text" id="custName" class="form-control" placeholder="ระบุชื่อจริงและนามสกุล"
-                                required minlength="5" pattern="^[a-zA-Zก-๙\s]+$" title="กรุณากรอกเฉพาะตัวอักษรและเว้นวรรค อย่างน้อย 5 ตัวอักษร">
+                                required minlength="5" pattern="^[a-zA-Zก-๙\s]+$"
+                                title="กรุณากรอกเฉพาะตัวอักษรและเว้นวรรค อย่างน้อย 5 ตัวอักษร">
                         </div>
                         <div class="form-group">
                             <label>เบอร์โทรศัพท์</label>
-                            <input type="tel" id="custPhone" class="form-control" placeholder="เช่น 0891234567"
-                                required minlength="9" maxlength="10" pattern="^0[0-9]{8,9}$" title="กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง (ขึ้นต้นด้วย 0 และมี 9-10 หลัก)">
+                            <input type="tel" id="custPhone" class="form-control" placeholder="เช่น 0891234567" required
+                                minlength="9" maxlength="10" pattern="^0[0-9]{8,9}$"
+                                title="กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง (ขึ้นต้นด้วย 0 และมี 9-10 หลัก)">
                         </div>
                         <div class="form-group">
                             <label>อีเมล (ถ้ามี)</label>
@@ -53,28 +56,28 @@
                             <label>ที่อยู่การจัดส่ง / ติดตั้ง</label>
                             <textarea id="custAddress" class="form-control" rows="4"
                                 placeholder="ระบุที่อยู่ให้ละเอียด บ้านเลขที่ ซอย ถนน ตำบล อำเภอ จังหวัด และรหัสไปรษณีย์"
-                                required minlength="20" title="กรุณากรอกที่อยู่ให้ครบถ้วนอย่างน้อย 20 ตัวอักษร"></textarea>
+                                required minlength="20"
+                                title="กรุณากรอกที่อยู่ให้ครบถ้วนอย่างน้อย 20 ตัวอักษร"></textarea>
                         </div>
                         <button type="submit" id="submitBtn" class="btn btn-large"
-                            style="width:100%; margin-top:20px; background-color: #00B900; color: white; border: none;">
+                            style="width:100%; margin-top:20px; background-color: #00B900; color: white; border: none; font-weight:600; box-shadow: 0 4px 15px rgba(0, 185, 0, 0.3);">
                             <i class="fab fa-line" style="margin-right:8px;"></i> สั่งซื้อผ่าน LINE
                         </button>
                     </form>
                 </div>
-                <div class="checkout-summary-wrap">
-                    <div class="cart-summary" style="margin:0; position: sticky; top: 100px;">
-                        <h3>สรุปคำสั่งซื้อ</h3>
-                        <hr style="margin:15px 0; border:0; border-top:1px solid var(--border-color);">
-                        <div id="checkoutItems" style="margin-bottom:20px; font-size:0.95rem;">
-                            <!-- Items from local storage -->
-                        </div>
-                        <div class="summary-row summary-total">
-                            <span>ยอดชำระสุทธิ:</span>
-                            <span id="checkoutTotal">฿0</span>
-                        </div>
-                        <div style="margin-top: 20px; text-align:center; font-size: 0.85rem; color: var(--text-muted);">
-                            <p>🔒 ข้อมูลการชำระเงินของคุณปลอดภัย</p>
-                        </div>
+
+                <div class="cart-summary-modern">
+                    <h3>สรุปคำสั่งซื้อ</h3>
+                    <div id="checkoutItems" class="summary-details" style="margin-bottom:15px; font-size:1.05rem;">
+                        <!-- Items from local storage -->
+                    </div>
+                    <hr style="margin:15px 0; border:0; border-top:1px dashed #cbd5e1;">
+                    <div class="summary-row summary-total">
+                        <span>ยอดชำระสุทธิ:</span>
+                        <span id="checkoutTotal">฿0</span>
+                    </div>
+                    <div style="margin-top: 20px; text-align:center; font-size: 0.85rem; color: #64748b;">
+                        <p><i class="fas fa-lock" style="color:#00B900;"></i> ข้อมูลการชำระเงินของคุณปลอดภัย</p>
                     </div>
                 </div>
             </div>
@@ -91,7 +94,8 @@
     <!-- Floating Social Icons -->
     <div class="floating-socials">
         <a href="tel:0891234567" class="social-icon phone-icon" title="โทรเลย"><i class="fas fa-phone"></i></a>
-        <a href="#" class="social-icon line-icon" title="LINE"><i class="fab fa-line"></i></a>
+        <a href="https://line.me/R/ti/p/@312ntoyv" target="_blank" class="social-icon line-icon" title="LINE"><i
+                class="fab fa-line"></i></a>
         <a href="https://www.facebook.com/profile.php?id=61578644667892" target="_blank"
             class="social-icon messenger-icon" title="Messenger"><i class="fab fa-facebook-messenger"></i></a>
         <a href="#" class="social-icon tiktok-icon" title="TikTok"><i class="fab fa-tiktok"></i></a>

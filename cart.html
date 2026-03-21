@@ -20,7 +20,8 @@
                 <li class="nav-social"><a href="https://www.facebook.com/profile.php?id=61578644667892"
                         target="_blank"><i class="fab fa-facebook-square"></i> Facebook</a>
                 </li>
-                <li class="nav-social"><a href="#" target="_blank"><i class="fab fa-line"></i> LINE</a></li>
+                <li class="nav-social"><a href="https://line.me/R/ti/p/@312ntoyv" target="_blank"><i
+                            class="fab fa-line"></i> LINE</a></li>
                 <li><a href="cart.html" class="cart-nav">🛒 ตะกร้า <span id="cart-count">0</span></a></li>
             </ul>
         </div>
@@ -32,28 +33,36 @@
     </div>
     <section class="section-padding" style="flex: 1;">
         <div class="container">
-            <div class="checkout-grid" style="display:block;">
-                <table class="cart-table">
-                    <thead>
-                        <tr>
-                            <th>สินค้า</th>
-                            <th>ราคา</th>
-                            <th>จำนวน</th>
-                            <th>รวม</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody id="cartItems">
-                        <!-- Items rendered by JS -->
-                    </tbody>
-                </table>
-                <div class="cart-summary" style="margin-left:auto; margin-top:20px;">
-                    <div class="summary-row summary-total">
-                        <span>ยอดรวมทั้งสิ้น:</span>
-                        <span id="cartTotal">฿0</span>
+            <div class="cart-modern-layout">
+                <div class="cart-items-container" id="cartItems">
+                    <!-- Items rendered by JS -->
+                </div>
+
+                <div class="cart-summary-modern">
+                    <h3 data-i18n="order_summary">สรุปคำสั่งซื้อ</h3>
+                    <div class="summary-details">
+                        <div class="summary-row">
+                            <span data-i18n="subtotal">มูลค่าสินค้า:</span>
+                            <span id="cartSubtotal">฿0</span>
+                        </div>
+                        <div class="summary-row">
+                            <span data-i18n="discount">ส่วนลด:</span>
+                            <span class="discount" style="color: var(--primary-color);">- ฿0</span>
+                        </div>
+                        <hr>
+                        <div class="summary-row summary-total">
+                            <span data-i18n="total_amount">ยอดรวมทั้งสิ้น:</span>
+                            <span id="cartTotal">฿0</span>
+                        </div>
                     </div>
-                    <a href="checkout.html" id="checkoutBtn" class="btn btn-primary"
-                        style="width:100%; display:block; margin-top:20px;">ดำเนินการชำระเงิน</a>
+                    <a href="checkout.html" id="checkoutBtn" class="btn btn-primary btn-block">
+                        <i class="fas fa-lock"></i> <span data-i18n="proceed_checkout">ดำเนินการชำระเงิน</span>
+                    </a>
+                    <div class="payment-methods">
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -70,7 +79,8 @@
     <!-- Floating Social Icons -->
     <div class="floating-socials">
         <a href="tel:0891234567" class="social-icon phone-icon" title="โทรเลย"><i class="fas fa-phone"></i></a>
-        <a href="#" class="social-icon line-icon" title="LINE"><i class="fab fa-line"></i></a>
+        <a href="https://line.me/R/ti/p/@312ntoyv" target="_blank" class="social-icon line-icon" title="LINE"><i
+                class="fab fa-line"></i></a>
         <a href="https://www.facebook.com/profile.php?id=61578644667892" target="_blank"
             class="social-icon messenger-icon" title="Messenger"><i class="fab fa-facebook-messenger"></i></a>
         <a href="#" class="social-icon tiktok-icon" title="TikTok"><i class="fab fa-tiktok"></i></a>

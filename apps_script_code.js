@@ -1,22 +1,49 @@
 /*
 วิธีใช้งาน:
-1. สร้าง Google Sheets ใหม่ขึ้นมา 1 ไฟล์
-2. ไปที่เมนู ส่วนขยาย (Extensions) -> Apps Script (หรือ สคริปต์ของแอป)
-3. ลบโค้ดที่มีอยู่ทั้งหมดออก และนำโค้ดด้านล่างนี้ไปวางแทน
-4. กดบันทึก (หรือกด Ctrl + S)
-5. กดปุ่มด้านบนขวา "การทำให้ใช้งานได้" (Deploy) -> "การทำให้ใช้งานได้รายการใหม่" (New deployment)
-6. เลือกประเภทการทำให้ใช้งานได้ เป็น "เว็บแอป" (Web app) โดยกดรููปเฟือง
-7. ช่องการเข้าถึง (Who has access) ให้เลือกเป็น "ทุกคน" (Anyone)
-8. กด "ทำให้ใช้งานได้" (Deploy)
-9. ระบบอาจจะให้การอนุมัติสิทธิ์ (Authorize access) ให้ใช้อีเมลตัวเองกดยอมรับให้เรียบร้อย
-10. เมื่อเสร็จสิ้น คุณจะได้ "URL ของเว็บแอป" ให้ก๊อปปี้ URL นั้น
-11. นำ URL นั้นไปใส่ในไฟล์ script.js บรรทัดที่เขียนว่า "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL"
+1. ขอ "Channel Access Token" จากระบบ LINE Webhook (LINE Developers) นำมาใส่ในบรรทัด LINE_ACCESS_TOKEN
+2. ใน Google Sheets ให้เพิ่มคอลัมน์ I (คอลัมน์ที่ 9) ตั้งชื่อว่า "สถานะการจัดส่ง" เพื่อให้คุณคอยอัปเดตสถานะ (เช่น กำลังแพ็ค, จัดส่งแล้ว)
+3. เอาโค้ดใหม่นี้ไปวางทับใน Apps Script แล้วกด Deploy -> New Deployment อีกครั้ง
+4. นำ Web App URL รอบใหม่นี้ ไปใส่ใน Webhook URL ใน LINE Developers และกด Verify
 */
 
 const SHEET_NAME = 'database'; // ชื่อ Sheet ใน Google Sheets หากเปลี่ยนชื่อต้องแก้ตรงนี้ด้วย
+const LINE_ACCESS_TOKEN = 'XJepK/GlXhQ81kq2Fbbd21Uol3BI2ZDuxBKVfP4Xxyqrcm0NoqfhyiNolyWwsnlGIcUtxwpPcwJrSSMbK4B03GPiejFv7n+30HUNbSstKSYzwOG5vUWi03H76nuEsiUzsbNTpo4JuV4aIw5NwzWlKQdB04t89/1O/w1cDnyilFU='; // เอามาจาก LINE Developers
 
 function doPost(e) {
   try {
+    // -----------------------------------------------------
+    // -----------------------------------------------------
+    // 1. ระบบจัดการข้อความจาก LINE OA (Webhook)
+    // -----------------------------------------------------
+    if (e.postData && e.postData.contents) {
+      try {
+        const lineData = JSON.parse(e.postData.contents);
+
+        // วนลูปเช็ค Event ว่ามีใครทักมาหรือไม่ (ต้องเป็นข้อมูลตระกูล LINE เท่านั้นถึงจะมี events)
+        if (lineData.events) {
+          if (lineData.events.length > 0) {
+            lineData.events.forEach(event => {
+              if (event.type === 'message' && event.message.type === 'text') {
+                const userMessage = event.message.text.trim();
+                const replyToken = event.replyToken;
+
+                // เช็คว่าข้อความที่ลูกค้าพิมพ์มา เป็นรหัสพัสดุ (ขึ้นต้นด้วย RS) หรือไม่
+                if (userMessage.startsWith('RS')) { // ตัวอย่างรหัส RS260321-ABCD
+                  replyOrderStatus(replyToken, userMessage);
+                }
+              }
+            });
+          }
+          return HtmlService.createHtmlOutput("OK");
+        }
+      } catch (err) {
+        // หากแปลง JSON ไม่ได้ (เพราะเป็นข้อมูลรหัสออเดอร์จากหน้าเว็บเพจ) ให้ข้ามการทำงานบอทไปทำส่วนที่ 2 แทน
+      }
+    }
+
+    // -----------------------------------------------------
+    // 2. ระบบดึงข้อมูลจากหน้าเว็บ (บันทึกลง Database)
+    // -----------------------------------------------------
     const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
 
     // ตั้งค่าหัวตาราง (Headers) หากหน้าชีทยังว่างเปล่า
@@ -29,18 +56,14 @@ function doPost(e) {
         'อีเมล',
         'ที่อยู่',
         'รายละเอียดสินค้า',
-        'ยอดรวม (บาท)'
+        'ยอดรวม (บาท)',
+        'สถานะการจัดส่ง' // คอลัมน์ที่ 9 สำหรับให้บอทอ่านไปตอบลูกค้า
       ]);
-      // ปรับแต่งหน้าตาตารางเล็กน้อย
-      sheet.getRange('A1:H1').setFontWeight('bold').setBackground('#efefef');
+      sheet.getRange('A1:I1').setFontWeight('bold').setBackground('#efefef');
       sheet.setColumnWidth(1, 150);
-      sheet.setColumnWidth(2, 150);
-      sheet.setColumnWidth(3, 150);
-      sheet.setColumnWidth(4, 120);
-      sheet.setColumnWidth(5, 180);
       sheet.setColumnWidth(6, 300);
       sheet.setColumnWidth(7, 300);
-      sheet.setColumnWidth(8, 100);
+      sheet.setColumnWidth(9, 200);
     }
 
     // ดึงข้อมูลที่ส่งมาจากหน้าฟอร์มที่ฝั่งเว็บ
@@ -52,6 +75,7 @@ function doPost(e) {
     const address = e.parameter.address || '-';
     const orderSummary = e.parameter.orderSummary || '-';
     const total = e.parameter.total || '0';
+    const defaultStatus = 'ได้รับคำสั่งซื้อแล้ว (รอดำเนินการ)';
 
     // เพิ่มข้อมูลลงในแถวใหม่
     sheet.appendRow([
@@ -62,7 +86,8 @@ function doPost(e) {
       email,
       address,
       orderSummary,
-      total
+      total,
+      defaultStatus
     ]);
 
     // ตอบกลับว่าทำงานสำเร็จ (ตอบกลับเป็น JSON)
@@ -75,4 +100,44 @@ function doPost(e) {
       .createTextOutput(JSON.stringify({ 'result': 'error', 'error': error.message }))
       .setMimeType(ContentService.MimeType.JSON);
   }
+}
+
+// -----------------------------------------------------
+// ฟังก์ชันสำหรับดึงสถานะจาก Google Sheets ไปตอบกลับใน LINE
+// -----------------------------------------------------
+function replyOrderStatus(replyToken, trackingId) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
+  const data = sheet.getDataRange().getValues();
+
+  let statusMessage = `ไม่พบข้อมูลหมายเลขคำสั่งซื้อ: ${trackingId}\n\nกรุณาตรวจสอบอักษรและตัวเลขให้ถูกต้องอีกครั้งครับ (ตัวพิมพ์เล็ก/พิมพ์ใหญ่อาจมีผล)`;
+
+  // ค้นหารหัสพัสดุจากแถวที่ 2 เป็นต้นไป (ข้ามหัวตาราง)
+  for (let i = 1; i < data.length; i++) {
+    if (data[i][0] === trackingId) { // คอลัมน์ที่ 1 (A) คือ Tracking ID
+      const name = data[i][2]; // คอลัมน์ที่ 3 (C) คือ ชื่อลูกค้า
+      const status = data[i][8] || "กำลังตรวจสอบข้อมูล"; // คอลัมน์ที่ 9 (I) คือ สถานะการจัดส่ง
+
+      statusMessage = `ตรวจสอบพบข้อมูลของคุณ ${name} เรียบร้อยครับ\n\n📦 หมายเลขพัสดุ: ${trackingId}\n\n=================\n📌 สถานะปัจจุบัน:\n👉 ${status}\n=================\nหากมีข้อสงสัยเพิ่มเติม สามารถพิมพ์สอบถามแอดมินทิ้งไว้ได้เลยครับ`;
+      break;
+    }
+  }
+
+  // ส่งข้อความตอบกลับไปยัง LINE API
+  const url = 'https://api.line.me/v2/bot/message/reply';
+  const options = {
+    'method': 'post',
+    'headers': {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + LINE_ACCESS_TOKEN
+    },
+    'payload': JSON.stringify({
+      'replyToken': replyToken,
+      'messages': [{
+        'type': 'text',
+        'text': statusMessage
+      }]
+    })
+  };
+
+  UrlFetchApp.fetch(url, options);
 }

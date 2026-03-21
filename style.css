@@ -1586,3 +1586,55 @@ ul {
 .form-group {
     margin-bottom: 20px;
 }
+
+/* ===== Mobile Responsive: Hero Buttons + Checkout Form ===== */
+@media (max-width: 768px) {
+    /* ปุ่มหน้า Hero ให้เล็กลงบนมือถือ */
+    .hero-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .hero-buttons .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        width: 100%;
+        max-width: 280px;
+    }
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    /* Checkout: กล่อง Input ให้เท่ากันหมดบนมือถือ */
+    .checkout-form-container {
+        padding: 20px 15px;
+    }
+    .form-control {
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 0.95rem;
+        padding: 12px 12px;
+    }
+    .cart-modern-layout {
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-buttons .btn {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+        max-width: 240px;
+    }
+    .hero-content h1 {
+        font-size: 1.6rem;
+    }
+    .checkout-form-container {
+        padding: 15px 12px;
+    }
+    .checkout-form-container h3 {
+        font-size: 1.15rem;
+    }
+}

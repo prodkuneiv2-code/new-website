@@ -164,31 +164,65 @@ document.addEventListener('DOMContentLoaded', () => {
     // Slider logic
     const slides = document.querySelectorAll('.slide');
     const dotsContainer = document.getElementById('sliderDots');
-    if (slides.length > 0 && dotsContainer) {
-        let currentSlide = 0;
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
 
-        slides.forEach((_, index) => {
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-            if (index === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => goToSlide(index));
-            dotsContainer.appendChild(dot);
-        });
+    if (slides.length > 0) {
+        let currentSlide = 0;
+        let slideInterval;
+
+        if (dotsContainer) {
+            slides.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => {
+                    goToSlide(index);
+                    resetInterval();
+                });
+                dotsContainer.appendChild(dot);
+            });
+        }
 
         const dots = document.querySelectorAll('.dot');
 
         function goToSlide(index) {
             slides[currentSlide].classList.remove('active');
-            dots[currentSlide].classList.remove('active');
-            currentSlide = index;
+            if (dots.length > 0) dots[currentSlide].classList.remove('active');
+            
+            // Handle bounds for arrows to loop correctly
+            currentSlide = (index + slides.length) % slides.length;
+            
             slides[currentSlide].classList.add('active');
-            dots[currentSlide].classList.add('active');
+            if (dots.length > 0) dots[currentSlide].classList.add('active');
         }
 
-        setInterval(() => {
-            let nextSlide = (currentSlide + 1) % slides.length;
-            goToSlide(nextSlide);
-        }, 4000);
+        function startInterval() {
+            slideInterval = setInterval(() => {
+                goToSlide(currentSlide + 1);
+            }, 4000);
+        }
+
+        function resetInterval() {
+            clearInterval(slideInterval);
+            startInterval();
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                goToSlide(currentSlide - 1);
+                resetInterval();
+            });
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                goToSlide(currentSlide + 1);
+                resetInterval();
+            });
+        }
+
+        startInterval();
     }
 
     // Render Cart logic

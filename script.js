@@ -307,10 +307,34 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right:8px;"></i> กำลังดำเนินการ...';
 
-            const name = document.getElementById('custName').value;
-            const phone = document.getElementById('custPhone').value;
-            const email = document.getElementById('custEmail').value;
-            const address = document.getElementById('custAddress').value;
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const email = document.getElementById('custEmail').value.trim();
+            const address = document.getElementById('custAddress').value.trim();
+
+            // Validation Checks
+            const nameRegex = /^[a-zA-Zก-๙\s]{5,}$/;
+            if (!nameRegex.test(name)) {
+                showToast('กรุณากรอกชื่อ-นามสกุลให้ถูกต้อง (อย่างน้อย 5 ตัวอักษร ไม่รับอักขระพิเศษ)');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnHtml;
+                return;
+            }
+
+            const phoneRegex = /^0[0-9]{8,9}$/;
+            if (!phoneRegex.test(phone)) {
+                showToast('กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง (ขึ้นต้นด้วย 0 และมี 9-10 หลัก)');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnHtml;
+                return;
+            }
+
+            if (address.length < 20) {
+                showToast('กรุณากรอกที่อยู่ให้ครบถ้วน (อย่างน้อย 20 ตัวอักษร)');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnHtml;
+                return;
+            }
 
             // Prepare order summary string
             let orderSummary = "";

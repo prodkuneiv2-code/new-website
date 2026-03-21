@@ -12,33 +12,44 @@ const LINE_ACCESS_TOKEN = 'XJepK/GlXhQ81kq2Fbbd21Uol3BI2ZDuxBKVfP4Xxyqrcm0Noqfhy
 function doPost(e) {
   try {
     // -----------------------------------------------------
+    // 1. ตรวจสอบว่าข้อมูลส่งมาจาก LINE หรือจากหน้าเว็บ
     // -----------------------------------------------------
-    // 1. ระบบจัดการข้อความจาก LINE OA (Webhook)
-    // -----------------------------------------------------
+    let isFromLine = false;
+    let lineData = null;
+
     if (e.postData && e.postData.contents) {
       try {
-        const lineData = JSON.parse(e.postData.contents);
-
-        // วนลูปเช็ค Event ว่ามีใครทักมาหรือไม่ (ต้องเป็นข้อมูลตระกูล LINE เท่านั้นถึงจะมี events)
+        lineData = JSON.parse(e.postData.contents);
         if (lineData.events) {
-          if (lineData.events.length > 0) {
-            lineData.events.forEach(event => {
-              if (event.type === 'message' && event.message.type === 'text') {
-                const userMessage = event.message.text.trim();
-                const replyToken = event.replyToken;
-
-                // เช็คว่าข้อความที่ลูกค้าพิมพ์มา เป็นรหัสพัสดุ (ขึ้นต้นด้วย RS) หรือไม่
-                if (userMessage.startsWith('RS')) { // ตัวอย่างรหัส RS260321-ABCD
-                  replyOrderStatus(replyToken, userMessage);
-                }
-              }
-            });
-          }
-          return HtmlService.createHtmlOutput("OK");
+          isFromLine = true; // ยืนยันว่ามาจาก LINE แน่นอน
         }
       } catch (err) {
-        // หากแปลง JSON ไม่ได้ (เพราะเป็นข้อมูลรหัสออเดอร์จากหน้าเว็บเพจ) ให้ข้ามการทำงานบอทไปทำส่วนที่ 2 แทน
+        // หากแปลง JSON ไม่ได้ แสดงว่าเป็นข้อมูล Form จากหน้าเว็บ (ปล่อยผ่านไปทำ Part 2)
       }
+    }
+
+    if (isFromLine) {
+      // -----------------------------------------------------
+      // ส่วนของบอท LINE
+      // -----------------------------------------------------
+      try {
+        if (lineData.events.length > 0) {
+          lineData.events.forEach(event => {
+            if (event.type === 'message' && event.message.type === 'text') {
+              const userMessage = event.message.text.trim().toUpperCase();
+              const replyToken = event.replyToken;
+
+              if (userMessage.startsWith('R') || userMessage.startsWith('RS')) {
+                replyOrderStatus(replyToken, userMessage);
+              }
+            }
+          });
+        }
+      } catch (botErr) {
+        // ดักจับ Error ในบอท เพื่อไม่ให้โปรแกรมพังแล้วเผลอหลุดลงไปบันทึก Sheet ว่างๆ ปลอมๆ
+      }
+      // จบการทำงานของฝั่ง LINE ทันทีตรงนี้ ไม่ให้ข้ามไปบันทึก Database
+      return HtmlService.createHtmlOutput("OK");
     }
 
     // -----------------------------------------------------
@@ -130,6 +141,7 @@ function replyOrderStatus(replyToken, trackingId) {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + LINE_ACCESS_TOKEN
     },
+    'muteHttpExceptions': true, // ป้องกันการ Crash เวลากดปุ่ม Verify ในหน้าตั้งค่า LINE
     'payload': JSON.stringify({
       'replyToken': replyToken,
       'messages': [{

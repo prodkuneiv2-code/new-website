@@ -52,6 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
             "f2_title": "ทนทานยาวนาน", "f2_desc": "วัสดุเกรดพรีเมียม ทนทานต่อทุกสภาพอากาศ รับประกันยาวนาน 25 ปี",
             "f3_title": "คุ้มค่าการลงทุน", "f3_desc": "จุดคุ้มทุนเร็ว ช่วยลดค่าไฟได้สูงสุดถึง 70% ต่อเดือนในระยะยาว",
             "port_title": "ผลงานของเรา", "port_sub": "ตัวอย่างการติดตั้งแผงโซล่าเซลล์จากลูกค้าที่ไว้วางใจเรา",
+            "port_sl_1_h": "บ้านพักอาศัย 2 ชั้น", "port_sl_1_p": "ประหยัดค่าไฟ 3,000+ บาท/เดือน คืนทุนไวใน 4 ปี",
+            "port_sl_2_h": "โฮมออฟฟิศ / ออฟฟิศ", "port_sl_2_p": "ลดต้นทุนธุรกิจระยะยาว ใช้งานไฟกลางวันคุ้มค่า",
+            "port_sl_3_h": "อาคารพานิชย์ / โรงงาน", "port_sl_3_p": "ระบบมาตรฐานยอดเยี่ยม รับประกันแผงยาวนาน 25 ปี",
             "prod_title": "ผลิตภัณฑ์ของเรา", "prod_sub": "เลือกผลิตภัณฑ์ที่เหมาะกับความต้องการของคุณ",
             "cat_1": "แผงโซล่าเซลล์ (Solar Panels)", "cat_2": "อินเวอร์เตอร์ (Inverters)", "cat_3": "ปั้มน้ำโซล่าเซลล์ (Solar Pumps)",
             "desc_1": "แผงโมโนคริสตัลไลน์ประสิทธิภาพสูง เหมาะสำหรับหลังคามีพื้นที่จำกัด",
@@ -85,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "cookie_link": "นโยบายความเป็นส่วนตัว (PDPA)",
             "btn_c_dec": "ปฏิเสธ", "btn_c_acc": "ยอมรับทั้งหมด",
             "contact_page_h1": "ติดต่อเรา", "contact_page_h2": "พร้อมให้คำปรึกษาและบริการคุณ", "contact_page_p": "ติดต่อประเมินหน้างานฟรี ไม่มีค่าใช้จ่ายแอบแฝง",
-            "contact_info_h3": "ช่องทางการติดต่อ", "contact_form_h3": "ฝากข้อความถึงเรา", "btn_send_msg": "ส่งข้อความ",
+            "contact_info_h3": "ช่องทางการติดต่อ", "contact_form_h3": "ฝากข้อความถึงเรา", "btn_send_msg": "ส่งข้อความ", "btn_send_line": "ส่งข้อความผ่าน LINE",
             "about_h2": "เกี่ยวกับเรา RaydeeSolar",
             "about_h3": "\"ส่งมอบพลังงานสะอาด เพื่ออนาคตที่ยั่งยืนของคุณ\"",
             "about_p1": "เราคือผู้เชี่ยวชาญด้านระบบพลังงานแสงอาทิตย์แบบครบวงจร ด้วยประสบการณ์การติดตั้งและให้บริการมาอย่างยาวนาน เรามุ่งมั่นคัดสรรเฉพาะอุปกรณ์คุณภาพยอดเยี่ยม และได้มาตรฐานระดับสากลเท่านั้น",
@@ -153,6 +156,9 @@ document.addEventListener('DOMContentLoaded', () => {
             "f2_title": "Long-Lasting Durability", "f2_desc": "Premium materials, weather resistant, 25-year warranty",
             "f3_title": "Worth the Investment", "f3_desc": "Fast breakeven, reduces power bills up to 70% monthly",
             "port_title": "Our Portfolio", "port_sub": "Installation examples from our trusted clients",
+            "port_sl_1_h": "2-Story Residential House", "port_sl_1_p": "Save 3,000+ THB/month. Fast ROI in 4 years.",
+            "port_sl_2_h": "Home Office / Office", "port_sl_2_p": "Reduce long-term business costs, perfect for daytime energy usage.",
+            "port_sl_3_h": "Commercial / Factory", "port_sl_3_p": "Excellent standard system with 25-year panel warranty.",
             "prod_title": "Our Products", "prod_sub": "Choose the right products for your needs",
             "cat_1": "Solar Panels", "cat_2": "Power Inverters", "cat_3": "Solar Water Pumps",
             "desc_1": "High efficiency monocrystalline panels, perfect for limited roof space.",
@@ -186,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "cookie_link": "Privacy Policy",
             "btn_c_dec": "Decline", "btn_c_acc": "Accept All",
             "contact_page_h1": "Contact Us", "contact_page_h2": "Ready to serve and consult", "contact_page_p": "Contact for a free site evaluation with no hidden costs",
-            "contact_info_h3": "Contact Channels", "contact_form_h3": "Leave us a message", "btn_send_msg": "Send Message",
+            "contact_info_h3": "Contact Channels", "contact_form_h3": "Leave us a message", "btn_send_msg": "Send Message", "btn_send_line": "Send via LINE",
             "about_h2": "About RaydeeSolar",
             "about_h3": "\"Delivering clean energy for your sustainable future\"",
             "about_p1": "We are a comprehensive solar energy system expert with extensive installation and service experience. We carefully select only top-quality, internationally-certified equipment.",
@@ -906,6 +912,34 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('cookieConsent', 'declined');
             cookieBanner.classList.remove('show');
             setTimeout(() => cookieBanner.remove(), 500);
+        });
+    }    // Initialize Swiper.js for Portfolio if element exists
+    if (document.querySelector('.mySwiper')) {
+        const swiper = new Swiper('.mySwiper', {
+            effect: "coverflow",
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: "auto",
+            coverflowEffect: {
+                rotate: 20,
+                stretch: 0,
+                depth: 150,
+                modifier: 1,
+                slideShadows: true,
+            },
+            loop: true,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
         });
     }
 });

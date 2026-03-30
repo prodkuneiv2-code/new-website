@@ -124,7 +124,9 @@
                             <label style="display:block; margin-bottom:8px; font-weight:500;">รายละเอียดเพิ่มเติม</label>
                             <textarea id="contactDetail" class="form-control" rows="5" style="width:100%; padding:12px; border:1px solid var(--border-color); border-radius:var(--radius);" placeholder="ระบุข้อความของคุณที่นี่..." data-i18n-ph="contact_ph_detail"></textarea>
                         </div>
-                        <button type="submit" id="contactSubmitBtn" class="btn btn-primary" style="width:100%; padding:14px; font-size:1.1rem; border:none; border-radius:var(--radius); cursor:pointer;">ส่งข้อความ</button>
+                        <button type="submit" id="contactSubmitBtn" class="btn" style="width:100%; padding:14px; font-size:1.1rem; border:none; border-radius:var(--radius); cursor:pointer; background-color:#00B900; color:white; font-weight:500;">
+                            <i class="fab fa-line" style="margin-right:8px; font-size: 1.2rem;"></i> <span data-i18n="btn_send_line">ส่งข้อความผ่าน LINE</span>
+                        </button>
                     </form>
                 </div>
             </div>
@@ -182,46 +184,29 @@
         document.addEventListener('DOMContentLoaded', () => {
             const contactForm = document.getElementById('contactForm');
             if(contactForm) {
-                contactForm.addEventListener('submit', async (e) => {
+                contactForm.addEventListener('submit', (e) => {
                     e.preventDefault();
                     
-                    const submitBtn = document.getElementById('contactSubmitBtn');
-                    const originalBtnHtml = submitBtn.innerHTML;
-                    submitBtn.disabled = true;
-                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right:8px;"></i> กำลังส่งข้อความ...';
-
                     const name = document.getElementById('contactName').value;
                     const phone = document.getElementById('contactPhone').value;
                     const topic = document.getElementById('contactTopic').value;
                     const detail = document.getElementById('contactDetail').value;
 
-                    // ใส่ URL เดียวกับหน้า Checkout
-                    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzghxato9j8nSYCILSNR3jM5wSAGGtqjw8KiaPje80ujDddL_lnSb2uyT57D4l6shg/exec";
-                    
-                    const formData = new URLSearchParams();
-                    formData.append('formType', 'contact');
-                    formData.append('timestamp', new Date().toLocaleString());
-                    formData.append('name', name);
-                    formData.append('phone', phone);
-                    formData.append('topic', topic);
-                    formData.append('detail', detail);
-
-                    try {
-                        await fetch(SCRIPT_URL, {
-                            method: 'POST',
-                            mode: 'no-cors',
-                            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                            body: formData.toString()
-                        });
-
-                        alert('ส่งข้อความสำเร็จ! เจ้าหน้าที่จะติดต่อกลับโดยเร็วที่สุดครับ');
-                        contactForm.reset();
-                    } catch (err) {
-                        alert('เกิดข้อผิดพลาดในการส่งข้อความ กรุณาลองใหม่อีกครั้ง หรือติดต่อผ่านเบอร์โทรศัพท์ครับ');
-                    } finally {
-                        submitBtn.disabled = false;
-                        submitBtn.innerHTML = originalBtnHtml;
+                    // สรุปข้อความสำหรับส่งเข้า LINE
+                    let message = `สวัสดีครับ/ค่ะ สนใจติดต่อเรื่อง:\n${topic}\n\n`;
+                    message += `ชื่อผู้ติดต่อ: ${name}\n`;
+                    message += `เบอร์โทร: ${phone}\n\n`;
+                    if (detail.trim() !== "") {
+                        message += `รายละเอียดเพิ่มเติม:\n${detail}\n`;
                     }
+                    message += `\n(รบกวนแอดมินติดต่อกลับด้วยครับ/ค่ะ)`;
+
+                    // LINE OA ID
+                    const lineId = "@312ntoyv";
+                    const lineUrl = `https://line.me/R/oaMessage/${lineId}/?${encodeURIComponent(message)}`;
+                    
+                    // พาไปยัง LINE
+                    window.location.href = lineUrl;
                 });
             }
         });

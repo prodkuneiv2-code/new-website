@@ -7,7 +7,9 @@
 */
 
 const SHEET_NAME = 'database'; // ชื่อ Sheet ใน Google Sheets หากเปลี่ยนชื่อต้องแก้ตรงนี้ด้วย
+const CONTACT_SHEET_NAME = 'contacts'; // ชื่อ Sheet สำหรับหน้าติดต่อเรา
 const LINE_ACCESS_TOKEN = 'XJepK/GlXhQ81kq2Fbbd21Uol3BI2ZDuxBKVfP4Xxyqrcm0NoqfhyiNolyWwsnlGIcUtxwpPcwJrSSMbK4B03GPiejFv7n+30HUNbSstKSYzwOG5vUWi03H76nuEsiUzsbNTpo4JuV4aIw5NwzWlKQdB04t89/1O/w1cDnyilFU='; // เอามาจาก LINE Developers
+const LINE_NOTIFY_TOKEN = 'YOUR_LINE_NOTIFY_TOKEN_HERE'; // ใส่ Token จาก LINE Notify สำหรับแจ้งเตือนแอดมิน
 
 function doPost(e) {
   try {
@@ -78,26 +80,64 @@ function doPost(e) {
     }
 
     // ดึงข้อมูลที่ส่งมาจากหน้าฟอร์มที่ฝั่งเว็บ
+    const formType = e.parameter.formType || 'checkout';
+
+    if (formType === 'contact') {
+      // -----------------------------------------------------
+      // ระบบรับข้อความจากหน้า "ติดต่อเรา"
+      // -----------------------------------------------------
+      const contactSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(CONTACT_SHEET_NAME) || SpreadsheetApp.getActiveSpreadsheet().insertSheet(CONTACT_SHEET_NAME);
+      
+      if (contactSheet.getLastRow() === 0) {
+        contactSheet.appendRow(['วันที่และเวลา', 'ชื่อ-นามสกุล', 'เบอร์โทรศัพท์', 'หัวข้อที่ติดต่อ', 'รายละเอียด']);
+        contactSheet.getRange('A1:E1').setFontWeight('bold').setBackground('#efefef');
+      }
+
+      const timestamp = e.parameter.timestamp || new Date().toLocaleString();
+      const name = e.parameter.name || '-';
+      const phone = e.parameter.phone || '-';
+      const topic = e.parameter.topic || '-';
+      const detail = e.parameter.detail || '-';
+
+      contactSheet.appendRow([timestamp, name, phone, topic, detail]);
+
+      // ส่งแจ้งเตือน LINE Notify
+      if (LINE_NOTIFY_TOKEN !== 'YOUR_LINE_NOTIFY_TOKEN_HERE' && LINE_NOTIFY_TOKEN !== '') {
+        const message = `\n🔔 มีข้อความติดต่อใหม่!\n\nผู้ติดต่อ: ${name}\nเบอร์โทร: ${phone}\nหัวข้อ: ${topic}\nรายละเอียด: ${detail}`;
+        const options = {
+          "method": "post",
+          "payload": { "message": message },
+          "headers": { "Authorization": "Bearer " + LINE_NOTIFY_TOKEN }
+        };
+        UrlFetchApp.fetch("https://notify-api.line.me/api/notify", options);
+      }
+
+      return ContentService.createTextOutput(JSON.stringify({ 'result': 'success' })).setMimeType(ContentService.MimeType.JSON);
+    }
+    
+    // -----------------------------------------------------
+    // ระบบรับข้อความจากตระกร้าสินค้า (Checkout)
+    // -----------------------------------------------------
     const trackingId = e.parameter.trackingId || '-';
-    const timestamp = e.parameter.timestamp || new Date().toLocaleString();
-    const name = e.parameter.name || '-';
-    const phone = e.parameter.phone || '-';
-    const email = e.parameter.email || '-';
-    const address = e.parameter.address || '-';
-    const orderSummary = e.parameter.orderSummary || '-';
-    const total = e.parameter.total || '0';
+    const timestamp_co = e.parameter.timestamp || new Date().toLocaleString();
+    const name_co = e.parameter.name || '-';
+    const phone_co = e.parameter.phone || '-';
+    const email_co = e.parameter.email || '-';
+    const address_co = e.parameter.address || '-';
+    const orderSummary_co = e.parameter.orderSummary || '-';
+    const total_co = e.parameter.total || '0';
     const defaultStatus = 'ได้รับคำสั่งซื้อแล้ว (รอดำเนินการ)';
 
     // เพิ่มข้อมูลลงในแถวใหม่
     sheet.appendRow([
       trackingId,
-      timestamp,
-      name,
-      phone,
-      email,
-      address,
-      orderSummary,
-      total,
+      timestamp_co,
+      name_co,
+      phone_co,
+      email_co,
+      address_co,
+      orderSummary_co,
+      total_co,
       defaultStatus
     ]);
 

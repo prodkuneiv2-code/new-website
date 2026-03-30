@@ -66,7 +66,80 @@ document.addEventListener('DOMContentLoaded', () => {
             "f_desc": "ผู้นำด้านเทคโนโลยีพลังงานแสงอาทิตย์ ให้บริการครบวงจรตั้งแต่ให้คำปรึกษาจนถึงติดตั้งและบำรุงรักษา",
             "f_link_title": "ลิงก์ด่วน", "f_contact_title": "ติดต่อเรา",
             "f_link1": "หน้าแรก", "f_link2": "เกี่ยวกับเรา", "f_link3": "สินค้าและการบริการ", "f_link4": "บทความให้ความรู้",
-            "badge_best": "ขายดี", "badge_new": "ใหม่", "f_rights": "&copy; 2026 RaydeeSolar. All rights reserved."
+            "badge_best": "ขายดี", "badge_new": "ใหม่", "f_rights": "&copy; 2026 RaydeeSolar. All rights reserved.",
+            "proc_h2": "ขั้นตอนการให้บริการ", "proc_p": "ดำเนินการอย่างมืออาชีพ ครบจบในที่เดียว",
+            "p1_h": "1. ปรึกษาฟรี", "p1_p": "รับฟังความต้องการและประเมินราคาเบื้องต้นตามการใช้งานจริง",
+            "p2_h": "2. สำรวจพื้นที่", "p2_p": "เข้าดูหน้างานจริงเพื่อออกแบบระบบและโครงสร้างให้เหมาะสม",
+            "p3_h": "3. ดำเนินการติดตั้ง", "p3_p": "ติดตั้งโดยทีมช่างผู้เชี่ยวชาญ พร้อมดำเนินการเรื่องเอกสารขออนุญาต",
+            "p4_h": "4. ส่งมอบงาน", "p4_p": "ทดสอบระบบ แนะนำการใช้งาน และรับประกันบริการหลังการขาย",
+            "faq_h2": "คำถามที่พบบ่อย (FAQ)", "faq_p": "ข้อสงสัยเกี่ยวกับโซล่าเซลล์ เรามีคำตอบ",
+            "f1_q": "ฝนตกหรือฟ้าครึ้ม โซล่าเซลล์ยังผลิตไฟได้ไหม? <i class=\"fas fa-chevron-down\"></i>",
+            "f1_a": "ยังสามารถผลิตไฟได้ครับ แต่ประสิทธิภาพอาจจะลดลงเหลือประมาณ 10-30% ของช่วงแดดจัด ขึ้นอยู่กับความหนาแน่นของเมฆฝน มักจะเชื่อมต่อกับการไฟฟ้าร่วมด้วย ทำให้มีไฟฟ้าใช้สม่ำเสมอแน่นอนครับ",
+            "f2_q": "ใช้เวลาติดตั้งและเดินเรื่องนานแค่ไหน? <i class=\"fas fa-chevron-down\"></i>",
+            "f2_a": "การติดตั้งแผงและระบบไฟฟ้าที่บ้านลูกค้า ปกติใช้เวลาเพียง 1-3 วัน (ขึ้นอยู่กับขนาดของงาน) ส่วนระยะเวลาการขออนุญาตขนานไฟจากการไฟฟ้า จะใช้เวลาดำเนินการประมาณ 1-3 เดือน ซึ่งทางเรามีทีมงานจัดการเรื่องเอกสารให้ทั้งหมดครับ",
+            "f3_q": "การรับประกันหลังการติดตั้งครอบคลุมอะไรบ้าง? <i class=\"fas fa-chevron-down\"></i>",
+            "f3_a": "แผงโซล่าเซลล์แบบใหม่ รับประกันประสิทธิภาพการผลิตไฟนานถึง 25 ปี อินเวอร์เตอร์รับประกัน 5-10 ปี (เปลี่ยนเครื่องใหม่ถ้ามีปัญหา) และเรารับประกันงานติดตั้ง (น้ำรั่วซึม/ระบบไฟ) 1-2 ปี พร้อมบริการล้างแผงและตรวจเช็คระบบฟรีในปีแรกครับ",
+            "f4_q": "บ้านแบบไหนที่เหมาะกับการติดโซล่าเซลล์? <i class=\"fas fa-chevron-down\"></i>",
+            "f4_a": "คุ้มค่าที่สุดคือบ้านที่ <strong>มีการใช้ไฟฟ้าในช่วงกลางวันเยอะ</strong> (เช่น เปิดแอร์, มีผู้ใหญ่อยู่บ้าน, โฮมออฟฟิศ, หรือร้านค้า) และมีบิลค่าไฟตั้งแต่ 2,000-3,000 บาทขึ้นไปต่อเดือน การติดโซล่าเซลล์จะช่วยคืนทุนได้เร็วมากภายใน 4-5 ปีครับ",
+            "cookie_msg": "เว็บไซต์นี้ใช้คุกกี้เพื่อนำเสนอประสบการณ์ที่ดีที่สุดให้คุณ หากใช้งานต่อถือว่าคุณยอมรับ",
+            "cookie_link": "นโยบายความเป็นส่วนตัว (PDPA)",
+            "btn_c_dec": "ปฏิเสธ", "btn_c_acc": "ยอมรับทั้งหมด",
+            "contact_page_h1": "ติดต่อเรา", "contact_page_h2": "พร้อมให้คำปรึกษาและบริการคุณ", "contact_page_p": "ติดต่อประเมินหน้างานฟรี ไม่มีค่าใช้จ่ายแอบแฝง",
+            "contact_info_h3": "ช่องทางการติดต่อ", "contact_form_h3": "ฝากข้อความถึงเรา", "btn_send_msg": "ส่งข้อความ",
+            "about_h2": "เกี่ยวกับเรา RaydeeSolar",
+            "about_h3": "\"ส่งมอบพลังงานสะอาด เพื่ออนาคตที่ยั่งยืนของคุณ\"",
+            "about_p1": "เราคือผู้เชี่ยวชาญด้านระบบพลังงานแสงอาทิตย์แบบครบวงจร ด้วยประสบการณ์การติดตั้งและให้บริการมาอย่างยาวนาน เรามุ่งมั่นคัดสรรเฉพาะอุปกรณ์คุณภาพยอดเยี่ยม และได้มาตรฐานระดับสากลเท่านั้น",
+            "about_p2": "ทีมวิศวกรและช่างผู้ชำนาญการของเรา พร้อมให้คำปรึกษา ออกแบบ และประเมินหน้างานฟรี เพื่อให้ระบบโซล่าเซลล์ตอบโจทย์การใช้งานของแต่ละครอบครัวและธุรกิจได้อย่างคุ้มค่าที่สุด การันตีผลงานคุณภาพด้วยฐานลูกค้าที่ไว้วางใจกว่าพันหลังคาเรือน",
+            "about_li1": "<i class=\"fas fa-check-circle\"></i> ทีมช่างผู้เชี่ยวชาญ ผ่านการอบรมมาตรฐานสากล",
+            "about_li2": "<i class=\"fas fa-check-circle\"></i> ดูแลครบวงจร ตั้งแต่ออกแบบ ขออนุญาต จนถึงติดตั้ง",
+            "about_li3": "<i class=\"fas fa-check-circle\"></i> บริการหลังการขายและล้างแผง ฟรี 1 ปี",
+            "calc_h2": "คำนวณความคุ้มค่า (Solar Calculator)",
+            "calc_p": "ประเมินจุดคุ้มทุนเบื้องต้นสำหรับระบบติดตั้งบ้านปกติ (คืนทุน 4-5 ปี)",
+            "calc_h3": "ค่าไฟเฉลี่ยต่อเดือนของคุณ?",
+            "calc_unit_1": "บาท / เดือน",
+            "calc_h4_1": "ขนาดระบบที่แนะนำ",
+            "calc_h4_2": "ประหยัดไฟได้ประมาณ",
+            "calc_unit_2": "บาท/เดือน",
+            "calc_h4_3": "ระยะเวลาคืนทุนโดยประมาณ",
+            "calc_unit_3": "ปี",
+            "calc_ph_bill": "ตัวอย่าง: 1500",
+            "contact_addr_2": "📍 123 ถนนสุขุมวิท, กรุงเทพฯ 10110",
+            "contact_li1": "<strong>ที่ตั้งบริษัท:</strong><br>123 ถนนสุขุมวิท แขวงคลองเตยเหนือ <br>เขตวัฒนา กรุงเทพฯ 10110",
+            "contact_li2": "<strong>เบอร์โทรศัพท์:</strong><br>089-123-4567<br>02-XXX-XXXX",
+            "contact_li3": "<strong>LINE Official:</strong><br>@312ntoyv",
+            "contact_li4": "<strong>อีเมล:</strong><br>contact@solartech.com",
+            "prod_page_h1": "ผลิตภัณฑ์ของเรา",
+            "prod_cat_used": "แผงโซล่าเซลล์มือสอง (สภาพดีเยี่ยม)",
+            "prod_used_h3": "แผงโซล่าเซลล์ 230W (มือสอง)",
+            "prod_used_desc": "แผงโซล่าเซลล์มือสอง สภาพดี ผ่านการตรวจสอบและทำความสะอาดแล้ว พร้อมใช้งาน เหมาะสำหรับระบบประหยัดงบหรือชุดนอนนา",
+            "prod_used_s1": "✓ กำลังไฟ 230W",
+            "prod_used_s2": "✓ สภาพ 85-90% ขึ้นไป เกรดคัดพิเศษ",
+            "prod_used_s3": "✓ รับประกันการใช้งาน 3 เดือน",
+            "badge_value": "คุ้มค่า",
+            "cart_page_h1": "ตะกร้าสินค้าของคุณ",
+            "checkout_page_h1": "รายละเอียดการชำระเงิน",
+            "cart_empty_h": "ไม่มีสินค้าในตะกร้า", "cart_empty_p": "เลือกดูสินค้าที่คุณสนใจได้เลย", "cart_empty_btn": "กลับไปเลือกซื้อสินค้า",
+            "order_summary": "สรุปคำสั่งซื้อ", "subtotal": "มูลค่าสินค้า:", "discount": "ส่วนลด:", "total_amount": "ยอดรวมทั้งสิ้น:", "proceed_checkout": "ดำเนินการชำระเงิน",
+            "chk_form_h3": "ข้อมูลการจัดส่ง / ติดตั้ง",
+            "chk_lbl_name": "ชื่อ-นามสกุล",
+            "chk_lbl_phone": "เบอร์โทรศัพท์",
+            "chk_lbl_email": "อีเมล (ถ้ามี)",
+            "chk_lbl_addr": "ที่อยู่การจัดส่ง / ติดตั้ง",
+            "chk_btn": "<i class=\"fab fa-line\" style=\"margin-right:8px;\"></i> สั่งซื้อผ่าน LINE",
+            "chk_summary_h3": "สรุปคำสั่งซื้อ",
+            "chk_total_lbl": "ยอดชำระสุทธิ:",
+            "chk_secure_p": "<i class=\"fas fa-lock\" style=\"color:#00B900;\"></i> ข้อมูลการชำระเงินของคุณปลอดภัย",
+            "chk_ph_name": "ระบุชื่อจริงและนามสกุล", "chk_ph_phone": "เช่น 0891234567", "chk_ph_email": "example@email.com", "chk_ph_addr": "ระบุที่อยู่ให้ละเอียด บ้านเลขที่ ซอย ถนน ตำบล อำเภอ จังหวัด และรหัสไปรษณีย์",
+            "contact_form_lbl1": "ชื่อ - นามสกุล *",
+            "contact_form_lbl2": "เบอร์โทรศัพท์ *",
+            "contact_form_lbl3": "เรื่องที่ต้องการติดต่อ",
+            "contact_topic1": "สนใจติดตั้งระบบโซล่าเซลล์ (ประเมินหน้างานฟรี)",
+            "contact_topic2": "สอบถามข้อมูลผลิตภัณฑ์มือสอง",
+            "contact_topic3": "แจ้งปัญหาเซลล์/บริการหลังการขาย",
+            "contact_topic4": "อื่นๆ",
+            "contact_form_lbl4": "รายละเอียดเพิ่มเติม",
+            "contact_ph_name": "กรอกชื่อของคุณ", "contact_ph_phone": "กรอกเบอร์โทรที่สามารถติดต่อได้", "contact_ph_detail": "ระบุข้อความของคุณที่นี่...",
+            "cart_item_total": "รวม:", "cart_rm_title": "ลบสินค้า"
         },
         en: {
             "nav_home": "Home", "nav_about": "About Us", "nav_products": 'Products <i class="fas fa-chevron-down" style="font-size: 0.8em; margin-left: 4px;"></i>', "nav_contact": "Contact Us",
@@ -94,13 +167,86 @@ document.addEventListener('DOMContentLoaded', () => {
             "f_desc": "Leader in solar technology, providing end-to-end services from consultation to installation and maintenance.",
             "f_link_title": "Quick Links", "f_contact_title": "Contact Us",
             "f_link1": "Home", "f_link2": "About Us", "f_link3": "Products & Services", "f_link4": "Knowledge Base",
-            "badge_best": "Best Seller", "badge_new": "New", "f_rights": "&copy; 2026 RaydeeSolar. All rights reserved."
+            "badge_best": "Best Seller", "badge_new": "New", "f_rights": "&copy; 2026 RaydeeSolar. All rights reserved.",
+            "proc_h2": "Our Process", "proc_p": "Professional execution from start to finish.",
+            "p1_h": "1. Free Consult", "p1_p": "Listen to your needs and estimate initial costs based on real usage.",
+            "p2_h": "2. Site Survey", "p2_p": "On-site assessment to design an appropriate system and structure.",
+            "p3_h": "3. Installation", "p3_p": "Installed by expert technicians, including all necessary permit processing.",
+            "p4_h": "4. Handover", "p4_p": "System testing, usage guidelines, and comprehensive after-sales warranty.",
+            "faq_h2": "Frequently Asked Questions", "faq_p": "Your solar questions, answered.",
+            "f1_q": "Can solar panels generate power on rainy or cloudy days? <i class=\"fas fa-chevron-down\"></i>",
+            "f1_a": "Yes, they still generate power, but efficiency may drop to 10-30% of peak sunshine depending on cloud density. We typically grid-tie your system to ensure continuous electricity supply.",
+            "f2_q": "How long does installation and permitting take? <i class=\"fas fa-chevron-down\"></i>",
+            "f2_a": "Physical installation usually takes 1-3 days depending on system size. Grid connection permits with the provincial authority may take 1-3 months, which our team handles completely.",
+            "f3_q": "What does the post-installation warranty cover? <i class=\"fas fa-chevron-down\"></i>",
+            "f3_a": "New solar panels have a 25-year performance warranty. Inverters carry 5-10 years (replacement for faults). Our installation work (leakage/electrical) spans 1-2 years, with free cleaning and system checks in the first year.",
+            "f4_q": "What kind of houses benefit most from solar? <i class=\"fas fa-chevron-down\"></i>",
+            "f4_a": "The highest value is for houses with <strong>high daytime electricity usage</strong> (e.g., A/C, remote work, home offices, shops) and monthly bills over 2,000-3,000 THB. Solar payback is extremely fast under these conditions (4-5 years).",
+            "cookie_msg": "This website uses cookies to provide the best experience. By continuing, you agree to our ",
+            "cookie_link": "Privacy Policy",
+            "btn_c_dec": "Decline", "btn_c_acc": "Accept All",
+            "contact_page_h1": "Contact Us", "contact_page_h2": "Ready to serve and consult", "contact_page_p": "Contact for a free site evaluation with no hidden costs",
+            "contact_info_h3": "Contact Channels", "contact_form_h3": "Leave us a message", "btn_send_msg": "Send Message",
+            "about_h2": "About RaydeeSolar",
+            "about_h3": "\"Delivering clean energy for your sustainable future\"",
+            "about_p1": "We are a comprehensive solar energy system expert with extensive installation and service experience. We carefully select only top-quality, internationally-certified equipment.",
+            "about_p2": "Our engineers and specialized technicians offer free consultations, designs, and on-site estimates to ensure the system meets your family's or business's needs cost-effectively. Quality guaranteed by thousands of satisfied customers.",
+            "about_li1": "<i class=\"fas fa-check-circle\"></i> Expert technicians with international standard training",
+            "about_li2": "<i class=\"fas fa-check-circle\"></i> Comprehensive service: from design and permits to installation",
+            "about_li3": "<i class=\"fas fa-check-circle\"></i> Free 1-year after-sales service and panel cleaning",
+            "calc_h2": "Solar Savings Calculator",
+            "calc_p": "Estimate initial breakeven point for standard house systems (4-5 years)",
+            "calc_h3": "Your average monthly electricity bill?",
+            "calc_unit_1": "THB / Month",
+            "calc_h4_1": "Recommended System Size",
+            "calc_h4_2": "Estimated Savings",
+            "calc_unit_2": "THB / Month",
+            "calc_h4_3": "Estimated Payback Period",
+            "calc_unit_3": "Years",
+            "calc_ph_bill": "e.g., 1500",
+            "contact_addr_2": "📍 123 Sukhumvit Rd, Bangkok 10110",
+            "contact_li1": "<strong>Location:</strong><br>123 Sukhumvit Rd, Khlong Toei Nuea, <br>Watthana, Bangkok 10110",
+            "contact_li2": "<strong>Phone:</strong><br>089-123-4567<br>02-XXX-XXXX",
+            "contact_li3": "<strong>LINE Official:</strong><br>@312ntoyv",
+            "contact_li4": "<strong>Email:</strong><br>contact@solartech.com",
+            "prod_page_h1": "Our Products",
+            "prod_cat_used": "Used Solar Panels (Excellent Condition)",
+            "prod_used_h3": "230W Solar Panel (Used)",
+            "prod_used_desc": "Used solar panels in excellent condition, fully inspected and cleaned. Perfect for budget setups or off-grid cabins.",
+            "prod_used_s1": "✓ 230W Power Output",
+            "prod_used_s2": "✓ 85-90%+ Condition, premium selected",
+            "prod_used_s3": "✓ 3 months warranty",
+            "badge_value": "Best Value",
+            "cart_page_h1": "Your Shopping Cart",
+            "checkout_page_h1": "Payment Details",
+            "cart_empty_h": "Your cart is empty", "cart_empty_p": "Browse our products and find what you need", "cart_empty_btn": "Go to Shop",
+            "order_summary": "Order Summary", "subtotal": "Subtotal:", "discount": "Discount:", "total_amount": "Total Amount:", "proceed_checkout": "Proceed to Checkout",
+            "chk_form_h3": "Shipping & Installation Info",
+            "chk_lbl_name": "Full Name",
+            "chk_lbl_phone": "Phone Number",
+            "chk_lbl_email": "Email Address (Optional)",
+            "chk_lbl_addr": "Shipping / Installation Address",
+            "chk_btn": "<i class=\"fab fa-line\" style=\"margin-right:8px;\"></i> Order via LINE",
+            "chk_summary_h3": "Order Summary",
+            "chk_total_lbl": "Net Total:",
+            "chk_secure_p": "<i class=\"fas fa-lock\" style=\"color:#00B900;\"></i> Your payment information is secure",
+            "chk_ph_name": "Enter full name", "chk_ph_phone": "e.g. 0891234567", "chk_ph_email": "example@email.com", "chk_ph_addr": "Enter full address: house number, street, sub-district, district, province, routing code",
+            "contact_form_lbl1": "Full Name *",
+            "contact_form_lbl2": "Phone Number *",
+            "contact_form_lbl3": "Subject",
+            "contact_topic1": "Interested in Solar Installation (Free Estimate)",
+            "contact_topic2": "Inquiry about used products",
+            "contact_topic3": "Maintenance / After-sales Service",
+            "contact_topic4": "Other",
+            "contact_form_lbl4": "Additional Details",
+            "contact_ph_name": "Enter your name", "contact_ph_phone": "Enter your contact number", "contact_ph_detail": "Enter your message here...",
+            "cart_item_total": "Total:", "cart_rm_title": "Remove item"
         }
     };
 
     const mapElements = {
         ".nav-links li:nth-child(1) a": "nav_home", ".nav-links li:nth-child(2) a": "nav_about",
-        ".nav-links li.nav-dropdown a.dropbtn": "nav_products",
+        ".nav-links li:nth-child(3) a": "nav_products",
         ".nav-links .dropdown-content a:nth-child(1)": "cat_1_short",
         ".nav-links .dropdown-content a:nth-child(2)": "cat_2_short",
         ".nav-links .dropdown-content a:nth-child(3)": "cat_3_short",
@@ -121,7 +267,49 @@ document.addEventListener('DOMContentLoaded', () => {
         ".footer-text": "f_desc", ".footer-col:nth-child(2) h4": "f_link_title", ".footer-col:nth-child(3) h4": "f_contact_title",
         ".footer-col:nth-child(2) li:nth-child(1) a": "f_link1", ".footer-col:nth-child(2) li:nth-child(2) a": "f_link2",
         ".footer-col:nth-child(2) li:nth-child(3) a": "f_link3", ".footer-col:nth-child(2) li:nth-child(4) a": "f_link4",
-        ".footer-bottom p": "f_rights"
+        ".footer-bottom p": "f_rights",
+        "#process .section-title h2": "proc_h2", "#process .section-title p": "proc_p",
+        ".process-step:nth-child(1) h3": "p1_h", ".process-step:nth-child(1) p": "p1_p",
+        ".process-step:nth-child(2) h3": "p2_h", ".process-step:nth-child(2) p": "p2_p",
+        ".process-step:nth-child(3) h3": "p3_h", ".process-step:nth-child(3) p": "p3_p",
+        ".process-step:nth-child(4) h3": "p4_h", ".process-step:nth-child(4) p": "p4_p",
+        "#faq .section-title h2": "faq_h2", "#faq .section-title p": "faq_p",
+        ".faq-item:nth-child(1) .faq-header": "f1_q", ".faq-item:nth-child(1) .faq-content": "f1_a",
+        ".faq-item:nth-child(2) .faq-header": "f2_q", ".faq-item:nth-child(2) .faq-content": "f2_a",
+        ".faq-item:nth-child(3) .faq-header": "f3_q", ".faq-item:nth-child(3) .faq-content": "f3_a",
+        ".faq-item:nth-child(4) .faq-header": "f4_q", ".faq-item:nth-child(4) .faq-content": "f4_a",
+        "#cookieMsg": "cookie_msg", "#cookiePolicyLink": "cookie_link",
+        "#btnCookieDecline": "btn_c_dec", "#btnCookieAccept": "btn_c_acc",
+        "#contact-header h1": "contact_page_h1", "#contact-page .section-title h2": "contact_page_h2", "#contact-page .section-title p": "contact_page_p",
+        ".contact-info-box h3": "contact_info_h3", ".contact-form-box h3": "contact_form_h3", ".contact-form-box button[type='submit']": "btn_send_msg",
+        "#about h2.section-title-sm": "about_h2", "#about h3": "about_h3",
+        "#about .profile-content p:nth-of-type(1)": "about_p1", "#about .profile-content p:nth-of-type(2)": "about_p2",
+        "#about .profile-features li:nth-child(1)": "about_li1", "#about .profile-features li:nth-child(2)": "about_li2", "#about .profile-features li:nth-child(3)": "about_li3",
+        "#calculator .section-title h2": "calc_h2", "#calculator .section-title p": "calc_p",
+        "#calculator h3": "calc_h3", "#calculator .unit": "calc_unit_1",
+        "#calculator .result-card:nth-child(1) h4": "calc_h4_1", "#calculator .result-card:nth-child(2) h4": "calc_h4_2",
+        "#calculator .result-card:nth-child(2) .res-unit": "calc_unit_2", "#calculator .result-card:nth-child(3) h4": "calc_h4_3",
+        "#calculator .result-card:nth-child(3) .res-unit": "calc_unit_3",
+        ".footer-col:nth-child(3) li:nth-child(1)": "contact_addr_2",
+        ".contact-info-list li:nth-child(1) div": "contact_li1", ".contact-info-list li:nth-child(2) div": "contact_li2",
+        ".contact-info-list li:nth-child(3) div": "contact_li3", ".contact-info-list li:nth-child(4) div": "contact_li4",
+        "#products-header h1": "prod_page_h1", 
+        ".category-title": "prod_cat_used", 
+        ".product-info h3": "prod_used_h3", ".product-info p.description": "prod_used_desc",
+        ".product-info ul.specs li:nth-child(1)": "prod_used_s1", ".product-info ul.specs li:nth-child(2)": "prod_used_s2", ".product-info ul.specs li:nth-child(3)": "prod_used_s3",
+        ".badge-new": "badge_value",
+        "#cart-header h1": "cart_page_h1",
+        "#checkout-header h1": "checkout_page_h1",
+        ".checkout-form-container h3": "chk_form_h3",
+        "#checkoutForm .form-group:nth-child(1) label": "chk_lbl_name", "#checkoutForm .form-group:nth-child(2) label": "chk_lbl_phone",
+        "#checkoutForm .form-group:nth-child(3) label": "chk_lbl_email", "#checkoutForm .form-group:nth-child(4) label": "chk_lbl_addr",
+        "#submitBtn": "chk_btn",
+        ".cart-summary-modern h3": "chk_summary_h3", ".summary-total span:nth-child(1)": "chk_total_lbl",
+        ".cart-summary-modern p": "chk_secure_p",
+        "#contactForm .form-group:nth-child(1) label": "contact_form_lbl1", "#contactForm .form-group:nth-child(2) label": "contact_form_lbl2",
+        "#contactForm .form-group:nth-child(3) label": "contact_form_lbl3", "#contactForm .form-group:nth-child(4) label": "contact_form_lbl4",
+        "#contactTopic option:nth-child(1)": "contact_topic1", "#contactTopic option:nth-child(2)": "contact_topic2",
+        "#contactTopic option:nth-child(3)": "contact_topic3", "#contactTopic option:nth-child(4)": "contact_topic4"
     };
 
     window.changeLang = (lang) => {
@@ -134,13 +322,38 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Translate specific selectors
         for (const [selector, key] of Object.entries(mapElements)) {
-            const el = document.querySelector(selector);
-            if (el && i18nDict[lang][key]) {
+            const elements = document.querySelectorAll(selector);
+            elements.forEach(el => {
+                if (i18nDict[lang][key]) {
+                    el.innerHTML = i18nDict[lang][key];
+                }
+            });
+        }
+
+        // Translate using data-i18n
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (i18nDict[lang] && i18nDict[lang][key]) {
                 el.innerHTML = i18nDict[lang][key];
             }
-        }
+        });
+
+        // Translate placeholders
+        document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+            const key = el.getAttribute('data-i18n-ph');
+            if (i18nDict[lang] && i18nDict[lang][key]) {
+                el.placeholder = i18nDict[lang][key];
+            }
+        });
+
+        // Translate titles
+        document.querySelectorAll('[data-i18n-title]').forEach(el => {
+            const key = el.getAttribute('data-i18n-title');
+            if (i18nDict[lang] && i18nDict[lang][key]) {
+                el.title = i18nDict[lang][key];
+            }
+        });
 
         // Translate repeating classes
         document.querySelectorAll('.overlay-add-cart').forEach(el => el.innerHTML = i18nDict[lang]["overlay_cart"]);
@@ -156,12 +369,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Auto-load saved language as soon as DOM is ready
-    document.addEventListener('DOMContentLoaded', () => {
-        const savedLang = localStorage.getItem('lang');
-        if (savedLang && savedLang === 'en') {
-            changeLang('en');
-        }
-    });
+    const savedLang = localStorage.getItem('lang');
+    if (savedLang) {
+        changeLang(savedLang);
+    }
 
     if (toTopBtn) {
         window.addEventListener('scroll', () => {
@@ -355,12 +566,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (cartItemsContainer) {
         let cart = JSON.parse(localStorage.getItem('solarCart')) || [];
         if (cart.length === 0) {
-            cartItemsContainer.innerHTML = '<div class="empty-cart" style="text-align: center; padding: 50px; background: white; border-radius: var(--radius); box-shadow: var(--shadow-sm);"><i class="fas fa-shopping-cart" style="font-size: 3rem; color: #cbd5e1; margin-bottom: 20px; display:block;"></i><h3 style="color: var(--dark-color)">ไม่มีสินค้าในตะกร้า</h3><p style="color: var(--text-color); margin-top: 10px; margin-bottom: 20px;">เลือกดูสินค้าที่คุณสนใจได้เลย</p><a href="index.html#products" class="btn btn-outline" style="color: var(--primary-color); border-color: var(--primary-color); display: inline-block;">กลับไปเลือกซื้อสินค้า</a></div>';
+            cartItemsContainer.innerHTML = '<div class="empty-cart" style="text-align: center; padding: 50px; background: white; border-radius: var(--radius); box-shadow: var(--shadow-sm);"><i class="fas fa-shopping-cart" style="font-size: 3rem; color: #cbd5e1; margin-bottom: 20px; display:block;"></i><h3 style="color: var(--dark-color)" data-i18n="cart_empty_h">ไม่มีสินค้าในตะกร้า</h3><p style="color: var(--text-color); margin-top: 10px; margin-bottom: 20px;" data-i18n="cart_empty_p">เลือกดูสินค้าที่คุณสนใจได้เลย</p><a href="products.html" class="btn btn-outline" style="color: var(--primary-color); border-color: var(--primary-color); display: inline-block;" data-i18n="cart_empty_btn">กลับไปเลือกซื้อสินค้า</a></div>';
             const checkoutBtn = document.getElementById('checkoutBtn');
             if (checkoutBtn) checkoutBtn.style.display = 'none';
         } else {
             renderCart(cart);
         }
+        if (typeof window.changeLang === 'function') window.changeLang(localStorage.getItem('lang') || 'th');
     }
 
     function renderCart(cart) {
@@ -381,10 +593,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <span class="item-qty">${item.quantity}</span>
                                 <button class="qty-btn" onclick="updateQty(${index}, ${item.quantity + 1})">+</button>
                             </div>
-                            <div style="font-weight:600; color:var(--dark-color)">รวม: ฿${subtotal.toLocaleString()}</div>
+                            <div style="font-weight:600; color:var(--dark-color)"><span data-i18n="cart_item_total">รวม:</span> ฿${subtotal.toLocaleString()}</div>
                         </div>
                     </div>
-                    <button class="remove-btn" onclick="removeItem(${index})" title="ลบสินค้า"><i class="fas fa-trash"></i></button>
+                    <button class="remove-btn" onclick="removeItem(${index})" title="ลบสินค้า" data-i18n-title="cart_rm_title"><i class="fas fa-trash"></i></button>
                 </div>
             `;
         });
@@ -568,6 +780,132 @@ document.addEventListener('DOMContentLoaded', () => {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalBtnHtml;
             }
+        });
+    }
+    // Solar Savings Calculator Logic
+    const billInput = document.getElementById('monthly-bill');
+    const resSize = document.getElementById('res-system-size');
+    const resSavings = document.getElementById('res-monthly-savings');
+    const resPayback = document.getElementById('res-payback');
+
+    if (billInput) {
+        billInput.addEventListener('input', (e) => {
+            let val = parseInt(e.target.value) || 0;
+            calculateSolar(val);
+        });
+
+        // Initial render
+        calculateSolar(parseInt(billInput.value) || 0);
+
+        function calculateSolar(bill) {
+            if (bill < 500) bill = 0;
+            
+            // Standard Calculation Config (สำหรับบ้านปกติ คืนทุน 4-5 ปี)
+            const SAVINGS_PER_KW = 600; // ประหยัดได้เดือนละ 600 บาท ต่อ 1 kW
+            const SYSTEM_COST_PER_KW = 35000; // ราคาติดตั้ง 35,000 บาท ต่อ 1 kW
+            const USAGE_RATIO = 0.7; // ตีเป็นใช้ไฟกลางวัน 70% ของค่าไฟทั้งหมด
+
+            let targetSavings = bill * USAGE_RATIO;
+            let recommendedSize = targetSavings / SAVINGS_PER_KW;
+            
+            // หา kW เป็นขั้นๆ (เลขสวยๆ ทีละครึ่ง kW) เล็กสุด 1.5 kW
+            recommendedSize = Math.max(1.5, Math.round(recommendedSize * 2) / 2); 
+            
+            if (bill === 0) recommendedSize = 0;
+
+            let monthlySaved = Math.round(Math.min(bill, recommendedSize * SAVINGS_PER_KW));
+            let totalCost = recommendedSize * SYSTEM_COST_PER_KW;
+            let paybackYears = (monthlySaved > 0) ? (totalCost / (monthlySaved * 12)) : 0;
+
+            // Animate number updates via UI
+            animateValue(resSize, parseFloat(resSize.innerText) || 0, recommendedSize, 500, true);
+            animateValue(resSavings, parseInt((resSavings.innerText).replace(/,/g, '')) || 0, monthlySaved, 500, false);
+            animateValue(resPayback, parseFloat(resPayback.innerText) || 0, paybackYears, 500, true);
+        }
+
+        // Helper function for number rolling effect
+        function animateValue(obj, start, end, duration, isFloat) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                // Ease out quad
+                const easeProgress = progress * (2 - progress);
+                const current = start + easeProgress * (end - start);
+                
+                if (isFloat) {
+                    obj.innerText = current.toFixed(1);
+                } else {
+                    obj.innerText = Math.round(current).toLocaleString();
+                }
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    if (isFloat) obj.innerText = end.toFixed(1);
+                    else obj.innerText = Math.round(end).toLocaleString();
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+    }
+
+    // FAQ Accordion Logic
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        const header = item.querySelector('.faq-header');
+        if(header) {
+            header.addEventListener('click', () => {
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                        otherItem.querySelector('.faq-body').style.maxHeight = null;
+                    }
+                });
+                item.classList.toggle('active');
+                const body = item.querySelector('.faq-body');
+                if (item.classList.contains('active')) {
+                    body.style.maxHeight = body.scrollHeight + "px";
+                } else {
+                    body.style.maxHeight = null;
+                }
+            });
+        }
+    });
+
+    // Cookie Consent Banner Logic
+    if (!localStorage.getItem('cookieConsent')) {
+        const cookieBanner = document.createElement('div');
+        cookieBanner.className = 'cookie-consent';
+        const lang = localStorage.getItem('lang') || 'th';
+        
+        cookieBanner.innerHTML = `
+            <div class="container cookie-content">
+                <div class="cookie-text">
+                    <p><span id="cookieMsg">${i18nDict[lang]["cookie_msg"]}</span> <a href="#" id="cookiePolicyLink" style="color:var(--primary-color);text-decoration:underline;">${i18nDict[lang]["cookie_link"]}</a></p>
+                </div>
+                <div class="cookie-buttons">
+                    <button class="btn-cookie-decline" id="btnCookieDecline">${i18nDict[lang]["btn_c_dec"]}</button>
+                    <button class="btn-cookie-accept" id="btnCookieAccept">${i18nDict[lang]["btn_c_acc"]}</button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(cookieBanner);
+
+        // Show banner after reading content (1.5s delay)
+        setTimeout(() => {
+            cookieBanner.classList.add('show');
+        }, 1500);
+
+        document.getElementById('btnCookieAccept').addEventListener('click', () => {
+            localStorage.setItem('cookieConsent', 'accepted');
+            cookieBanner.classList.remove('show');
+            setTimeout(() => cookieBanner.remove(), 500); // fade out wait
+        });
+
+        document.getElementById('btnCookieDecline').addEventListener('click', () => {
+            localStorage.setItem('cookieConsent', 'declined');
+            cookieBanner.classList.remove('show');
+            setTimeout(() => cookieBanner.remove(), 500);
         });
     }
 });

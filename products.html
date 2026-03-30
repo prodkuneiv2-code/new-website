@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สินค้า | RaydeeSolar</title>
+    <meta name="description" content="จำหน่ายและติดตั้งแผงโซล่าเซลล์ที่ทันสมัยและมีประสิทธิภาพสูง สำหรับบ้านและธุรกิจของคุณ">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="display: flex; flex-direction: column; min-height: 100vh;">
+    <!-- Navbar -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="container nav-content">
+            <a href="index.html" class="logo">Raydee<span>Solar</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html#home">หน้าแรก</a></li>
+                <li><a href="index.html#about">เกี่ยวกับเรา</a></li>
+                <li><a href="products.html">สินค้า</a></li>
+                <li><a href="contact.html">ติดต่อเรา</a></li>
+                <li class="nav-social"><a href="https://www.facebook.com/profile.php?id=61578644667892" target="_blank"><i class="fab fa-facebook-square"></i> Facebook</a></li>
+                <li class="nav-social"><a href="https://line.me/R/ti/p/@312ntoyv" target="_blank"><i class="fab fa-line"></i> LINE</a></li>
+                <li><a href="cart.html" class="cart-nav">🛒 ตะกร้า <span id="cart-count">0</span></a></li>
+            </ul>
+            <div class="nav-right">
+                <div class="lang-switcher">
+                    <span class="lang-btn active" data-lang="th" onclick="changeLang('th')">ไทย</span>
+                    <span class="lang-divider">|</span>
+                    <span class="lang-btn" data-lang="en" onclick="changeLang('en')">English</span>
+                </div>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-header" id="products-header">
+        <div class="container">
+            <h1>ผลิตภัณฑ์ของเรา</h1>
+        </div>
+    </div>
+
+    <!-- Products Section -->
+    <section id="products" class="products section-padding" style="flex: 1;">
+        <div class="container">
+            <div class="section-title text-center animate-fade-up">
+                <h2>เลือกผลิตภัณฑ์ที่เหมาะกับความต้องการของคุณ</h2>
+            </div>
+            <!-- Category: Used Panel -->
+            <div class="category-section animate-fade-up">
+                <div class="category-header">
+                    <div class="category-icon"><i class="fas fa-solar-panel"></i></div>
+                    <h3 class="category-title">แผงโซล่าเซลล์มือสอง (สภาพดีเยี่ยม)</h3>
+                </div>
+                <div class="product-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 400px)); justify-content: center;">
+                    <!-- Product 1 -->
+                    <div class="product-card animate-fade-up category-item" data-category="panel">
+                        <div class="product-img">
+                            <img src="https://images.unsplash.com/photo-1509391366360-12005dbd5a03?q=80&w=800&fm=webp&fit=crop"
+                                alt="แผงโซล่าเซลล์ 230W มือสอง" loading="lazy">
+                            <span class="badge badge-new" style="background-color: var(--secondary-color);">คุ้มค่า</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>แผงโซล่าเซลล์ 230W (มือสอง)</h3>
+                            <p class="description">แผงโซล่าเซลล์มือสอง สภาพดี ผ่านการตรวจสอบและทำความสะอาดแล้ว พร้อมใช้งาน เหมาะสำหรับระบบประหยัดงบหรือชุดนอนนา</p>
+                            <ul class="specs">
+                                <li>✓ กำลังไฟ 230W</li>
+                                <li>✓ สภาพ 85-90% ขึ้นไป เกรดคัดพิเศษ</li>
+                                <li>✓ รับประกันการใช้งาน 3 เดือน</li>
+                            </ul>
+                            <div class="price-action">
+                                <span class="price">฿ 990</span>
+                                <button class="btn btn-sm btn-primary add-to-cart-btn" data-id="1"
+                                    data-name="แผงโซล่าเซลล์ 230W (มือสอง)" data-price="990"
+                                    data-img="https://images.unsplash.com/photo-1509391366360-12005dbd5a03?q=80&w=200&fm=webp&fit=crop">หยิบใส่ตะกร้า</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta section-padding blur-bg">
+        <div class="container text-center animate-fade-up">
+            <h2>พร้อมที่จะเปลี่ยนมาใช้พลังงานสะอาดหรือยัง?</h2>
+            <p>ทีมงานผู้เชี่ยวชาญของเราพร้อมให้คำปรึกษาและประเมินพื้นที่ฟรี</p>
+            <a href="contact.html" class="btn btn-primary btn-large">ติดต่อประเมินหน้างานฟรี</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="logo">Raydee<span> Solar</span></a>
+                    <p class="footer-text">ผู้นำด้านเทคโนโลยีพลังงานแสงอาทิตย์
+                        ให้บริการครบวงจรตั้งแต่ให้คำปรึกษาจนถึงติดตั้งและบำรุงรักษา</p>
+                </div>
+                <div class="footer-col">
+                    <h4>ลิงก์ด่วน</h4>
+                    <ul>
+                        <li><a href="index.html#home">หน้าแรก</a></li>
+                        <li><a href="index.html#about">เกี่ยวกับเรา</a></li>
+                        <li><a href="products.html">สินค้าและการบริการ</a></li>
+                        <li><a href="#">บทความให้ความรู้</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>ติดต่อเรา</h4>
+                    <ul class="contact-info">
+                        <li>📍 123 ถนนสุขุมวิท, กรุงเทพฯ 10110</li>
+                        <li>📞 02-XXX-XXXX</li>
+                        <li>✉️ contact@solartech.com</li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 RaydeeSolar. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Social Icons -->
+    <div class="floating-socials">
+        <a href="tel:0891234567" class="social-icon phone-icon" title="โทรเลย"><i class="fas fa-phone"></i></a>
+        <a href="https://line.me/R/ti/p/@312ntoyv" target="_blank" class="social-icon line-icon" title="LINE"><i
+                class="fab fa-line"></i></a>
+        <a href="https://www.facebook.com/profile.php?id=61578644667892" target="_blank"
+            class="social-icon messenger-icon" title="Messenger"><i class="fab fa-facebook-messenger"></i></a>
+        <a href="#" class="social-icon tiktok-icon" title="TikTok"><i class="fab fa-tiktok"></i></a>
+    </div>
+
+    <!-- To Top Button -->
+    <button class="to-top-btn" id="toTopBtn">↑</button>
+
+    <script src="script.js" defer></script>
+</body>
+</html>

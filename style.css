@@ -1705,7 +1705,8 @@ ul {
 
 .video-wrapper {
     position: relative;
-    padding-bottom: 56.25%; /* 16:9 */
+    padding-bottom: 56.25%;
+    /* 16:9 */
     height: 0;
     border-radius: calc(var(--radius) - 5px);
     overflow: hidden;
@@ -1763,7 +1764,8 @@ ul {
     position: absolute;
     top: -10px;
     left: -5px;
-    color: rgba(70, 130, 180, 0.2); /* Primary color low opacity */
+    color: rgba(70, 130, 180, 0.2);
+    /* Primary color low opacity */
     z-index: 0;
     line-height: 1;
 }
@@ -1931,6 +1933,7 @@ ul {
     .calc-results-section {
         grid-template-columns: 1fr;
     }
+
     .calc-container {
         padding: 25px 15px;
     }
@@ -2149,7 +2152,7 @@ ul {
     align-items: flex-start;
     gap: 15px;
     margin-bottom: 20px;
-    color: rgba(255,255,255,0.8);
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .contact-info-list i {
@@ -2191,34 +2194,40 @@ ul {
     left: 0;
     width: 100%;
     background-color: var(--white);
-    box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
     padding: 20px 0;
     z-index: 9999;
     transform: translateY(100%);
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .cookie-consent.show {
     transform: translateY(0);
 }
+
 .cookie-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 30px;
 }
+
 .cookie-text {
     font-size: 0.95rem;
     color: var(--text-color);
     flex: 1;
 }
+
 .cookie-text p {
     margin: 0;
 }
+
 .cookie-buttons {
     display: flex;
     gap: 15px;
     flex-shrink: 0;
 }
+
 .btn-cookie-accept {
     background-color: var(--primary-color);
     color: var(--white);
@@ -2230,11 +2239,13 @@ ul {
     font-weight: 500;
     transition: var(--transition);
 }
+
 .btn-cookie-accept:hover {
     background-color: var(--primary-hover);
     transform: translateY(-2px);
     box-shadow: var(--shadow-sm);
 }
+
 .btn-cookie-decline {
     background-color: transparent;
     color: var(--text-muted);
@@ -2245,19 +2256,23 @@ ul {
     cursor: pointer;
     transition: var(--transition);
 }
+
 .btn-cookie-decline:hover {
     background-color: var(--light-color);
     color: var(--dark-color);
 }
+
 @media (max-width: 768px) {
     .cookie-content {
         flex-direction: column;
         text-align: center;
         gap: 15px;
     }
+
     .cookie-buttons {
         width: 100%;
         justify-content: center;
+    }
 }
 
 /* Portfolio Swiper Carousel Styling */
@@ -2299,7 +2314,7 @@ ul {
     left: 0;
     width: 100%;
     height: 50%;
-    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0) 100%);
     z-index: 1;
 }
 
@@ -2318,7 +2333,7 @@ ul {
     font-size: 1.5rem;
     color: var(--white);
     margin-bottom: 8px;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .slide-overlay-text p {
@@ -2337,11 +2352,10 @@ ul {
 .swiper-button-prev::after {
     font-size: 1.5rem !important;
     font-weight: bold;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
     transform: scale(1.1);
-}
 }

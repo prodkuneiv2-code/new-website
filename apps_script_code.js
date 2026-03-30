@@ -82,12 +82,25 @@ function doPost(e) {
     // ดึงข้อมูลที่ส่งมาจากหน้าฟอร์มที่ฝั่งเว็บ
     const formType = e.parameter.formType || 'checkout';
 
+    if (formType === 'updateStatus') {
+      const trackingIdToUpdate = e.parameter.trackingId;
+      const newStatus = e.parameter.status;
+      const data = sheet.getDataRange().getValues();
+      for (let i = 1; i < data.length; i++) {
+        if (data[i][0] === trackingIdToUpdate) {
+          sheet.getRange(i + 1, 9).setValue(newStatus);
+          return ContentService.createTextOutput(JSON.stringify({ 'result': 'success' })).setMimeType(ContentService.MimeType.JSON);
+        }
+      }
+      return ContentService.createTextOutput(JSON.stringify({ 'result': 'error', 'message': 'Not found' })).setMimeType(ContentService.MimeType.JSON);
+    }
+
     if (formType === 'contact') {
       // -----------------------------------------------------
       // ระบบรับข้อความจากหน้า "ติดต่อเรา"
       // -----------------------------------------------------
       const contactSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(CONTACT_SHEET_NAME) || SpreadsheetApp.getActiveSpreadsheet().insertSheet(CONTACT_SHEET_NAME);
-      
+
       if (contactSheet.getLastRow() === 0) {
         contactSheet.appendRow(['วันที่และเวลา', 'ชื่อ-นามสกุล', 'เบอร์โทรศัพท์', 'หัวข้อที่ติดต่อ', 'รายละเอียด']);
         contactSheet.getRange('A1:E1').setFontWeight('bold').setBackground('#efefef');
@@ -114,7 +127,7 @@ function doPost(e) {
 
       return ContentService.createTextOutput(JSON.stringify({ 'result': 'success' })).setMimeType(ContentService.MimeType.JSON);
     }
-    
+
     // -----------------------------------------------------
     // ระบบรับข้อความจากตระกร้าสินค้า (Checkout)
     // -----------------------------------------------------
@@ -192,4 +205,67 @@ function replyOrderStatus(replyToken, trackingId) {
   };
 
   UrlFetchApp.fetch(url, options);
+}
+
+// -----------------------------------------------------
+// ฟังก์ชันสำหรับดึงข้อมูลผ่าน GET Request (ใช้อ่านให้ระบบหลังบ้าน Admin)
+// -----------------------------------------------------
+function doGet(e) {
+  try {
+    const action = e.parameter.action;
+
+    if (action === 'getOrders') {
+      const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
+      if (!sheet) {
+        return ContentService.createTextOutput(JSON.stringify({ error: 'Sheet not found' })).setMimeType(ContentService.MimeType.JSON);
+      }
+
+      const data = sheet.getDataRange().getValues();
+      const orders = [];
+      // ข้ามหัวตารางที่แถวแรก (i=1)
+      for (let i = 1; i < data.length; i++) {
+        orders.push({
+          trackingId: data[i][0] || '',
+          date: data[i][1] || '',
+          name: data[i][2] || '',
+          phone: data[i][3] || '',
+          email: data[i][4] || '',
+          address: data[i][5] || '',
+          items: data[i][6] || '',
+          total: data[i][7] || 0,
+          status: data[i][8] || ''
+        });
+      }
+      // รีเทิร์นข้อมูลกลับโดยเรียงรายการใหม่สุดขึ้นก่อน
+      return ContentService.createTextOutput(JSON.stringify(orders.reverse())).setMimeType(ContentService.MimeType.JSON);
+    }
+
+    if (action === 'getContacts') {
+      const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(CONTACT_SHEET_NAME);
+      if (!sheet) {
+        return ContentService.createTextOutput(JSON.stringify({ error: 'Sheet contacts not found' })).setMimeType(ContentService.MimeType.JSON);
+      }
+
+      const data = sheet.getDataRange().getValues();
+      const contacts = [];
+      // ข้ามหัวตารางที่แถวแรก (i=1)
+      for (let i = 1; i < data.length; i++) {
+        contacts.push({
+          date: data[i][0] || '',
+          name: data[i][1] || '',
+          phone: data[i][2] || '',
+          topic: data[i][3] || '',
+          detail: data[i][4] || ''
+        });
+      }
+      // รีเทิร์นข้อมูลกลับโดยเรียงรายการใหม่สุดขึ้นก่อน
+      return ContentService.createTextOutput(JSON.stringify(contacts.reverse())).setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // Default GET response
+    return ContentService.createTextOutput(JSON.stringify({ status: 'ok', name: 'RaydeeSolar API is running' })).setMimeType(ContentService.MimeType.JSON);
+
+  } catch (err) {
+    return ContentService.createTextOutput(JSON.stringify({ error: err.message })).setMimeType(ContentService.MimeType.JSON);
+  }
 }

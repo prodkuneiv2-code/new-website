@@ -299,8 +299,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ".footer-col:nth-child(3) li:nth-child(1)": "contact_addr_2",
         ".contact-info-list li:nth-child(1) div": "contact_li1", ".contact-info-list li:nth-child(2) div": "contact_li2",
         ".contact-info-list li:nth-child(3) div": "contact_li3", ".contact-info-list li:nth-child(4) div": "contact_li4",
-        "#products-header h1": "prod_page_h1", 
-        ".category-title": "prod_cat_used", 
+        "#products-header h1": "prod_page_h1",
+        ".category-title": "prod_cat_used",
         ".product-info h3": "prod_used_h3", ".product-info p.description": "prod_used_desc",
         ".product-info ul.specs li:nth-child(1)": "prod_used_s1", ".product-info ul.specs li:nth-child(2)": "prod_used_s2", ".product-info ul.specs li:nth-child(3)": "prod_used_s3",
         ".badge-new": "badge_value",
@@ -805,7 +805,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function calculateSolar(bill) {
             if (bill < 500) bill = 0;
-            
+
             // Standard Calculation Config (สำหรับบ้านปกติ คืนทุน 4-5 ปี)
             const SAVINGS_PER_KW = 600; // ประหยัดได้เดือนละ 600 บาท ต่อ 1 kW
             const SYSTEM_COST_PER_KW = 35000; // ราคาติดตั้ง 35,000 บาท ต่อ 1 kW
@@ -813,10 +813,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let targetSavings = bill * USAGE_RATIO;
             let recommendedSize = targetSavings / SAVINGS_PER_KW;
-            
+
             // หา kW เป็นขั้นๆ (เลขสวยๆ ทีละครึ่ง kW) เล็กสุด 1.5 kW
-            recommendedSize = Math.max(1.5, Math.round(recommendedSize * 2) / 2); 
-            
+            recommendedSize = Math.max(1.5, Math.round(recommendedSize * 2) / 2);
+
             if (bill === 0) recommendedSize = 0;
 
             let monthlySaved = Math.round(Math.min(bill, recommendedSize * SAVINGS_PER_KW));
@@ -838,7 +838,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Ease out quad
                 const easeProgress = progress * (2 - progress);
                 const current = start + easeProgress * (end - start);
-                
+
                 if (isFloat) {
                     obj.innerText = current.toFixed(1);
                 } else {
@@ -859,7 +859,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const faqItems = document.querySelectorAll('.faq-item');
     faqItems.forEach(item => {
         const header = item.querySelector('.faq-header');
-        if(header) {
+        if (header) {
             header.addEventListener('click', () => {
                 faqItems.forEach(otherItem => {
                     if (otherItem !== item && otherItem.classList.contains('active')) {
@@ -883,7 +883,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const cookieBanner = document.createElement('div');
         cookieBanner.className = 'cookie-consent';
         const lang = localStorage.getItem('lang') || 'th';
-        
+
         cookieBanner.innerHTML = `
             <div class="container cookie-content">
                 <div class="cookie-text">

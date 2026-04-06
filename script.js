@@ -256,7 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ".nav-links .dropdown-content a:nth-child(1)": "cat_1_short",
         ".nav-links .dropdown-content a:nth-child(2)": "cat_2_short",
         ".nav-links .dropdown-content a:nth-child(3)": "cat_3_short",
-        ".nav-links li:nth-child(4) a": "nav_contact", ".cart-nav": "nav_cart",
+        ".nav-links li:nth-child(5) a": "nav_contact", ".cart-nav": "nav_cart",
         ".hero-content h1": "hero_title", ".hero-content p": "hero_sub",
         ".hero-buttons a.btn-primary": "hero_btn1", ".hero-buttons a.btn-outline": "hero_btn2",
         "#about .section-title h2": "why_title", "#about .section-title p": "why_sub",
@@ -420,7 +420,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateCartCount() {
         const cartCount = document.getElementById('cart-count');
         let cart = JSON.parse(localStorage.getItem('solarCart')) || [];
-        let count = cart.reduce((sum, item) => sum + item.quantity, 0);
+        let count = cart.reduce((sum, item) => sum + (item.qty || item.quantity || 0), 0);
         if (cartCount) cartCount.innerText = count;
     }
     updateCartCount();
@@ -446,7 +446,58 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3000);
     }
 
-    // Add to cart buttons
+    // Add to cart buttons & Fetch Inventory logic
+    const fetchInventory = async () => {
+        try {
+            const res = await fetch("https://script.google.com/macros/s/AKfycbzghxato9j8nSYCILSNR3jM5wSAGGtqjw8KiaPje80ujDddL_lnSb2uyT57D4l6shg/exec?action=getInventory");
+            const inventory = await res.json();
+
+            inventory.forEach(item => {
+                const stockEls = document.querySelectorAll(`.inventory-count[data-id="${item.id}"]`);
+                stockEls.forEach(el => {
+                    // Remove old state classes
+                    el.classList.remove('stock-ok', 'stock-low', 'stock-out');
+
+                    if (item.stock <= 0) {
+                        // Out of stock
+                        el.classList.add('stock-out');
+                        el.textContent = 'สินค้าหมด';
+                        // Disable add-to-cart button
+                        const btn = document.querySelector(`.add-to-cart-btn[data-id="${item.id}"]`);
+                        if (btn) {
+                            btn.disabled = true;
+                            btn.textContent = 'สินค้าหมด';
+                            btn.style.cssText = 'background-color:#94a3b8; cursor:not-allowed; box-shadow:none;';
+                        }
+                    } else if (item.stock <= 5) {
+                        // Low stock warning
+                        el.classList.add('stock-low');
+                        el.textContent = `⚠️ เหลือน้อย ${item.stock} ชิ้น`;
+                    } else {
+                        // In stock
+                        el.classList.add('stock-ok');
+                        el.textContent = `✓ มีสินค้า ${item.stock} ชิ้น`;
+                    }
+                });
+
+                // Cache inventory for add-to-cart validation
+                window.inventoryStock = window.inventoryStock || {};
+                window.inventoryStock[item.id] = item.stock;
+            });
+        } catch (error) {
+            // Silently hide stock badges on error
+            document.querySelectorAll('.inventory-count').forEach(el => {
+                el.style.display = 'none';
+            });
+            console.warn("Inventory fetch failed:", error);
+        }
+    };
+
+    // Load inventory on product pages
+    if (document.querySelector('.add-to-cart-btn')) {
+        fetchInventory();
+    }
+
     const addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
     addToCartBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -458,6 +509,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let cart = JSON.parse(localStorage.getItem('solarCart')) || [];
             let existingItem = cart.find(item => item.id === id);
+
+            let currentQtyInCart = existingItem ? existingItem.quantity : 0;
+            let availableStock = (window.inventoryStock && window.inventoryStock[id] !== undefined) ? window.inventoryStock[id] : 999;
+
+            if (currentQtyInCart + 1 > availableStock) {
+                showToast(`ไม่สามารถเพิ่มซ้ำได้ สินค้าเหลือ ${availableStock} ชิ้น`);
+                return;
+            }
 
             if (existingItem) {
                 existingItem.quantity += 1;
@@ -639,7 +698,43 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         let total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        document.getElementById('checkoutTotal').innerText = `฿${total.toLocaleString()}`;
+        let shippingFee = 0;
+        let grandTotal = total;
+
+        const provinces = ["กระบี่", "กรุงเทพมหานคร", "กาญจนบุรี", "กาฬสินธุ์", "กำแพงเพชร", "ขอนแก่น", "จันทบุรี", "ฉะเชิงเทรา", "ชลบุรี", "ชัยนาท", "ชัยภูมิ", "ชุมพร", "เชียงราย", "เชียงใหม่", "ตรัง", "ตราด", "ตาก", "นครนายก", "นครปฐม", "นครพนม", "นครราชสีมา", "นครศรีธรรมราช", "นครสวรรค์", "นนทบุรี", "นราธิวาส", "น่าน", "บึงกาฬ", "บุรีรัมย์", "ปทุมธานี", "ประจวบคีรีขันธ์", "ปราจีนบุรี", "ปัตตานี", "พระนครศรีอยุธยา", "พะเยา", "พังงา", "พัทลุง", "พิจิตร", "พิษณุโลก", "เพชรบุรี", "เพชรบูรณ์", "แพร่", "ภูเก็ต", "มหาสารคาม", "มุกดาหาร", "แม่ฮ่องสอน", "ยโสธร", "ยะลา", "ร้อยเอ็ด", "ระนอง", "ระยอง", "ราชบุรี", "ลพบุรี", "ลำปาง", "ลำพูน", "เลย", "ศรีสะเกษ", "สกลนคร", "สงขลา", "สตูล", "สมุทรปราการ", "สมุทรสงคราม", "สมุทรสาคร", "สระแก้ว", "สระบุรี", "สิงห์บุรี", "สุโขทัย", "สุพรรณบุรี", "สุราษฎร์ธานี", "สุรินทร์", "หนองคาย", "หนองบัวลำภู", "อ่างทอง", "อำนาจเจริญ", "อุดรธานี", "อุตรดิตถ์", "อุทัยธานี", "อุบลราชธานี"];
+        const bkkAndVicinity = ["กรุงเทพมหานคร", "นนทบุรี", "ปทุมธานี", "สมุทรปราการ"];
+
+        const provSelect = document.getElementById('custProvince');
+        if (provSelect) {
+            provinces.sort().forEach(p => {
+                let opt = document.createElement('option');
+                opt.value = p;
+                opt.text = p;
+                provSelect.appendChild(opt);
+            });
+
+            provSelect.addEventListener('change', () => {
+                let selectedProv = provSelect.value;
+                let isBKK = bkkAndVicinity.includes(selectedProv);
+
+                let totalItemsQty = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+                if (isBKK) {
+                    shippingFee = 150 * totalItemsQty;
+                } else {
+                    shippingFee = 250 * totalItemsQty;
+                }
+
+                grandTotal = total + shippingFee;
+                document.getElementById('shippingCost').innerText = `฿${shippingFee.toLocaleString()}`;
+                document.getElementById('checkoutTotal').innerText = `฿${grandTotal.toLocaleString()}`;
+            });
+        }
+
+        const elTotal = document.getElementById('checkoutTotal');
+        const elShipping = document.getElementById('shippingCost');
+        if (elTotal) elTotal.innerText = `฿${grandTotal.toLocaleString()}`;
+        if (elShipping) elShipping.innerText = `฿${shippingFee.toLocaleString()}`;
 
         let itemsHtml = '';
         cart.forEach(item => {
@@ -663,8 +758,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const phone = document.getElementById('custPhone').value.trim();
             const email = document.getElementById('custEmail').value.trim();
             const address = document.getElementById('custAddress').value.trim();
+            const provEl = document.getElementById('custProvince');
+            const province = provEl ? provEl.value : '';
 
             // Validation Checks
+            if (!province) {
+                showToast('กรุณาเลือกจังหวัดสำหรับการจัดส่ง');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnHtml;
+                return;
+            }
             const nameRegex = /^[a-zA-Zก-๙\s]{5,}$/;
             if (!nameRegex.test(name)) {
                 showToast('กรุณากรอกชื่อ-นามสกุลให้ถูกต้อง (อย่างน้อย 5 ตัวอักษร ไม่รับอักขระพิเศษ)');
@@ -700,13 +803,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const trackingId = `RS${datePart}-${randomPart}`;
 
             const formData = new URLSearchParams();
-            formData.append('trackingId', trackingId); // ส่ง Tracking ID เข้าไปด้วย
+            formData.append('trackingId', trackingId);
             formData.append('name', name);
             formData.append('phone', phone);
             formData.append('email', email);
             formData.append('address', address);
             formData.append('orderSummary', orderSummary);
-            formData.append('total', total);
+            formData.append('total', grandTotal);
+            formData.append('province', province);
+            formData.append('shippingFee', shippingFee);
+            formData.append('cartData', JSON.stringify(cart));
             formData.append('timestamp', new Date().toLocaleString());
 
             const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzghxato9j8nSYCILSNR3jM5wSAGGtqjw8KiaPje80ujDddL_lnSb2uyT57D4l6shg/exec";
@@ -767,7 +873,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 document.getElementById('closeModalBtn').addEventListener('click', () => {
                     document.getElementById('successModal').remove();
-                    if (typeof renderCart === 'function') renderCart(); // อัปเดตตารางให้ว่างเปล่า
+                    // Clear cart and reload to show empty state
+                    localStorage.removeItem('solarCart');
+                    updateCartCount();
+                    location.reload();
                 });
 
                 document.getElementById('goToLineBtn').addEventListener('click', () => {

@@ -1,110 +1,252 @@
 <!DOCTYPE html>
 <html lang="th">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ชำระเงิน | Raydee Solar</title>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>สั่งซื้อและชำระเงิน | RaydeeSolar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <style>
+    .page-header {
+      background: var(--dark);
+      color: var(--white);
+      padding: 120px 0 60px;
+      text-align: center;
+    }
+    .page-header h1 { color: var(--white); margin-bottom: 10px; font-size: 2.5rem; }
+
+    .checkout-container {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 40px;
+      padding: 60px 20px;
+      max-width: var(--container-width);
+      margin: 0 auto;
+    }
+
+    .form-section {
+      background: var(--white);
+      padding: 30px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 30px;
+    }
+    .form-section h3 {
+      font-size: 1.25rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 15px;
+      margin-bottom: 25px;
+      color: var(--primary);
+    }
+    
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .full-width { grid-column: 1 / -1; }
+
+    .shipping-box {
+      background: var(--light-alt);
+      border: 1px solid var(--border);
+      padding: 20px;
+      border-radius: var(--radius-sm);
+      margin-top: 20px;
+      margin-bottom: 25px;
+    }
+    .shipping-box h4 { margin-bottom: 15px; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: center;}
+    .shipping-result { display: none; padding: 15px; background: rgba(26, 60, 110, 0.05); border-left: 4px solid var(--primary); border-radius: 4px; margin-top: 15px; }
+    .shipping-result.active { display: block; }
+    .shipping-result p { margin-bottom: 5px; color: var(--text-muted); }
+    .shipping-result p strong { color: var(--dark); }
+
+    .payment-methods { display: flex; flex-direction: column; gap: 15px; }
+    .payment-option {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 15px;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex; align-items: center; gap: 15px;
+    }
+    .payment-option:hover { border-color: var(--primary); }
+    .payment-option.active { border-color: var(--primary); background: rgba(26, 60, 110, 0.02); }
+    .payment-option input[type="radio"] { width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer; }
+    .payment-option label { cursor: pointer; flex-grow: 1; font-weight: 500; font-size: 1.05rem; margin-bottom: 0; display: flex; align-items: center; gap: 10px; }
+    
+    .order-summary {
+      background: var(--white);
+      padding: 30px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 100px;
+    }
+    .order-summary h3 { margin-bottom: 20px; font-size: 1.4rem; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
+    .summary-item { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 0.95rem; color: var(--text-muted); padding-bottom: 15px; border-bottom: 1px dashed var(--border); }
+    .summary-item-name { max-width: 65%; }
+    .summary-row { display: flex; justify-content: space-between; margin-bottom: 15px; color: var(--text-muted); font-size: 1.05rem; }
+    .summary-total { display: flex; justify-content: space-between; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); font-weight: 700; font-size: 1.4rem; color: var(--dark); margin-bottom: 30px; }
+    
+    #submitOrderBtn { width: 100%; padding: 15px; font-size: 1.1rem; }
+
+    @media (max-width: 992px) {
+      .checkout-container { grid-template-columns: 1fr; }
+      .order-summary { position: static; }
+    }
+    @media (max-width: 576px) {
+      .form-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
+<body>
+  <div id="navbar-placeholder"></div>
 
-<body style="display: flex; flex-direction: column; min-height: 100vh;">
-    <nav class="navbar scrolled" id="navbar">
-        <div class="container nav-content">
-            <a href="index.html" class="logo">Raydee<span>Solar</span></a>
-            <ul class="nav-links">
-                <li><a href="index.html#home">หน้าแรก</a></li>
-                <li class="nav-social"><a href="https://www.facebook.com/profile.php?id=61578644667892"
-                        target="_blank"><i class="fab fa-facebook-square"></i> Facebook</a>
-                </li>
-                <li class="nav-social"><a href="https://line.me/R/ti/p/@312ntoyv" target="_blank"><i
-                            class="fab fa-line"></i> LINE</a></li>
-                <li><a href="cart.html" class="cart-nav">🛒 ตะกร้า <span id="cart-count">0</span></a></li>
-            </ul>
-        </div>
-    </nav>
-    <div class="page-header" id="checkout-header">
-        <div class="container">
-            <h1>รายละเอียดการชำระเงิน</h1>
-        </div>
+  <div class="page-header">
+    <div class="container">
+      <h1>ดำเนินการสั่งซื้อ</h1>
     </div>
-    <section class="section-padding" style="flex: 1;">
-        <div class="container">
-            <div class="cart-modern-layout">
-                <div class="checkout-form-container">
-                    <h3>ข้อมูลการจัดส่ง / ติดตั้ง</h3>
-                    <form id="checkoutForm" style="margin-top:20px;">
-                        <div class="form-group">
-                            <label>ชื่อ-นามสกุล</label>
-                            <input type="text" id="custName" class="form-control" placeholder="ระบุชื่อจริงและนามสกุล"
-                                required minlength="5" pattern="^[a-zA-Zก-๙\s]+$"
-                                title="กรุณากรอกเฉพาะตัวอักษรและเว้นวรรค อย่างน้อย 5 ตัวอักษร"
-                                data-i18n-ph="chk_ph_name">
-                        </div>
-                        <div class="form-group">
-                            <label>เบอร์โทรศัพท์</label>
-                            <input type="tel" id="custPhone" class="form-control" placeholder="เช่น 0891234567" required
-                                minlength="9" maxlength="10" pattern="^0[0-9]{8,9}$"
-                                title="กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง (ขึ้นต้นด้วย 0 และมี 9-10 หลัก)"
-                                data-i18n-ph="chk_ph_phone">
-                        </div>
-                        <div class="form-group">
-                            <label>อีเมล (ถ้ามี)</label>
-                            <input type="email" id="custEmail" class="form-control" placeholder="example@email.com"
-                                data-i18n-ph="chk_ph_email">
-                        </div>
-                        <div class="form-group">
-                            <label>ที่อยู่การจัดส่ง / ติดตั้ง</label>
-                            <textarea id="custAddress" class="form-control" rows="4"
-                                placeholder="ระบุที่อยู่ให้ละเอียด บ้านเลขที่ ซอย ถนน ตำบล อำเภอ จังหวัด และรหัสไปรษณีย์"
-                                required minlength="20" title="กรุณากรอกที่อยู่ให้ครบถ้วนอย่างน้อย 20 ตัวอักษร"
-                                data-i18n-ph="chk_ph_addr"></textarea>
-                        </div>
-                        <button type="submit" id="submitBtn" class="btn btn-large"
-                            style="width:100%; margin-top:20px; background-color: #00B900; color: white; border: none; font-weight:600; box-shadow: 0 4px 15px rgba(0, 185, 0, 0.3);">
-                            <i class="fab fa-line" style="margin-right:8px;"></i> สั่งซื้อผ่าน LINE
-                        </button>
-                    </form>
-                </div>
+  </div>
 
-                <div class="cart-summary-modern">
-                    <h3>สรุปคำสั่งซื้อ</h3>
-                    <div id="checkoutItems" class="summary-details" style="margin-bottom:15px; font-size:1.05rem;">
-                        <!-- Items from local storage -->
-                    </div>
-                    <hr style="margin:15px 0; border:0; border-top:1px dashed #cbd5e1;">
-                    <div class="summary-row summary-total">
-                        <span>ยอดชำระสุทธิ:</span>
-                        <span id="checkoutTotal">฿0</span>
-                    </div>
-                    <div style="margin-top: 20px; text-align:center; font-size: 0.85rem; color: #64748b;">
-                        <p><i class="fas fa-lock" style="color:#00B900;"></i> ข้อมูลการชำระเงินของคุณปลอดภัย</p>
-                    </div>
-                </div>
-            </div>
+  <div class="checkout-container">
+    <div class="checkout-left">
+      <!-- 1. Customer Info -->
+      <div class="form-section">
+        <h3><i class="fas fa-user"></i> 1. ข้อมูลผู้สั่งซื้อ</h3>
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label>ชื่อ-นามสกุล <span style="color:var(--danger)">*</span></label>
+            <input type="text" class="form-control" id="custName" placeholder="ระบุชื่อจริงและนามสกุล">
+          </div>
+          <div class="form-group">
+            <label>เบอร์โทรศัพท์ <span style="color:var(--danger)">*</span></label>
+            <input type="tel" class="form-control" id="custPhone" placeholder="เช่น 0891234567" maxlength="10">
+          </div>
+          <div class="form-group">
+            <label>อีเมล (ถ้ามี)</label>
+            <input type="email" class="form-control" id="custEmail" placeholder="example@email.com">
+          </div>
         </div>
-    </section>
-    <footer class="footer" style="padding: 40px 0 20px;">
-        <div class="container">
-            <div class="footer-bottom" style="margin-top:0;">
-                <p>&copy; 2026 RaydeeSolar. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+      </div>
 
-    <!-- Floating Social Icons -->
-    <div class="floating-socials">
-        <a href="tel:0891234567" class="social-icon phone-icon" title="โทรเลย"><i class="fas fa-phone"></i></a>
-        <a href="https://line.me/R/ti/p/@312ntoyv" target="_blank" class="social-icon line-icon" title="LINE"><i
-                class="fab fa-line"></i></a>
-        <a href="https://www.facebook.com/profile.php?id=61578644667892" target="_blank"
-            class="social-icon messenger-icon" title="Messenger"><i class="fab fa-facebook-messenger"></i></a>
-        <a href="#" class="social-icon tiktok-icon" title="TikTok"><i class="fab fa-tiktok"></i></a>
+      <!-- 2. Shipping Address -->
+      <div class="form-section">
+        <h3><i class="fas fa-map-marker-alt"></i> 2. ข้อมูลการจัดส่ง</h3>
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label>ที่อยู่ (บ้านเลขที่, ซอย, ถนน) <span style="color:var(--danger)">*</span></label>
+            <input type="text" class="form-control" id="addrDetail" placeholder="ระบุบ้านเลขที่, หมู่, อาคาร, ซอย, ถนน">
+          </div>
+          <div class="form-group">
+            <label>ตำบล/แขวง <span style="color:var(--danger)">*</span></label>
+            <input type="text" class="form-control" id="addrSubDistrict" placeholder="ระบุตำบล">
+          </div>
+          <div class="form-group">
+            <label>อำเภอ/เขต <span style="color:var(--danger)">*</span></label>
+            <input type="text" class="form-control" id="addrDistrict" placeholder="ระบุอำเภอ">
+          </div>
+          <div class="form-group">
+            <label>จังหวัด <span style="color:var(--danger)">*</span></label>
+            <input type="text" class="form-control" id="addrProvince" placeholder="ระบุจังหวัด (เช่น กรุงเทพมหานคร)">
+          </div>
+          <div class="form-group">
+            <label>รหัสไปรษณีย์ <span style="color:var(--danger)">*</span></label>
+            <input type="text" class="form-control" id="addrZip" placeholder="รหัสไปรษณีย์ 5 หลัก" maxlength="5">
+          </div>
+        </div>
+        
+        <div class="shipping-box">
+          <h4>การคำนวณค่าส่ง <button type="button" class="btn btn-outline" id="calcShippingBtn" style="padding: 6px 14px; font-size: 0.9rem;">คำนวณค่าส่ง</button></h4>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 10px;">
+            กรุณากรอกข้อมูลที่อยู่ให้ครบถ้วนเพื่อคำนวณระยะทางจากสระบุรี<br>
+            <small>*หากมีแผงโซล่าตั้งแต่ 4 แผงขึ้นไป จะคิดอัตราเหมาจ่ายตามระยะทาง</small>
+          </p>
+          <div class="shipping-result" id="shippingResult">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Payment Method -->
+      <div class="form-section">
+        <h3><i class="fas fa-wallet"></i> 3. เลือกวิธีชำระเงิน</h3>
+        <div class="payment-methods">
+          <div class="payment-option active" onclick="selectPayment('cod')">
+            <input type="radio" name="paymentOption" id="payCOD" value="เก็บเงินปลายทาง" checked>
+            <label for="payCOD"><i class="fas fa-hand-holding-usd" style="color:var(--success)"></i> เก็บเงินปลายทาง (COD)</label>
+          </div>
+          <div class="payment-option" onclick="selectPayment('bank')">
+            <input type="radio" name="paymentOption" id="payBank" value="โอนเงินผ่านธนาคาร">
+            <label for="payBank"><i class="fas fa-university" style="color:var(--primary)"></i> โอนเงินผ่านธนาคาร</label>
+          </div>
+          <div class="payment-option" onclick="selectPayment('promptpay')">
+            <input type="radio" name="paymentOption" id="payPromptPay" value="PromptPay">
+            <label for="payPromptPay"><i class="fas fa-qrcode" style="color:#113566"></i> พร้อมเพย์ (PromptPay)</label>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Order Summary -->
+    <div class="checkout-right">
+      <div class="order-summary">
+        <h3>สรุปคำสั่งซื้อ</h3>
+        <div id="checkoutItemsList">
+          <!-- Items placed here by JS -->
+        </div>
+        
+        <div style="margin-top:20px;">
+          <div class="summary-row">
+            <span>มูลค่าสินค้า:</span>
+            <span id="sumSubtotal">฿0</span>
+          </div>
+          <div class="summary-row">
+            <span>ค่าจัดส่ง:</span>
+            <span id="sumShipping" style="color:var(--warning)">รอคำนวณ</span>
+          </div>
+          <div class="summary-total">
+            <span>ยอดชำระสุทธิ:</span>
+            <span id="sumGrandTotal">฿0</span>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" id="submitOrderBtn" disabled>
+          <i class="fas fa-lock"></i> ยืนยันคำสั่งซื้อ
+        </button>
+        <p style="text-align: center; color: var(--danger); font-size: 0.85rem; margin-top: 10px;" id="submitWarning">
+          *กรุณากรอกที่อยู่และคำนวณค่าส่งก่อนยืนยัน
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer-placeholder"></div>
+
+  <script>
+    // Payment selection logic inline
+    function selectPayment(type) {
+      document.querySelectorAll('.payment-option').forEach(el => el.classList.remove('active'));
+      const radio = document.querySelector(`input[value="${type === 'cod' ? 'เก็บเงินปลายทาง' : type === 'bank' ? 'โอนเงินผ่านธนาคาร' : 'PromptPay'}"]`);
+      if(radio) {
+        radio.checked = true;
+        radio.closest('.payment-option').classList.add('active');
+      }
+    }
+  </script>
+  
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/main.js"></script>
+  <!-- Load Google Maps API directly (replace key in actual usage) -->
+  <script>
+    if(GOOGLE_MAPS_API_KEY && GOOGLE_MAPS_API_KEY !== 'YOUR_API_KEY_HERE') {
+      const script = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places`;
+      document.body.appendChild(script);
+    }
+  </script>
+  <script src="assets/js/checkout.js"></script>
 </body>
-
 </html>

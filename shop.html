@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ร้านค้าอุปกรณ์โซล่าเซลล์ | RaydeeSolar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <style>
+    .shop-header {
+      background: var(--dark);
+      color: var(--white);
+      padding: 120px 0 60px;
+      text-align: center;
+    }
+    .shop-header h1 { color: var(--white); margin-bottom: 10px; font-size: 2.5rem; }
+    .shop-header p { color: #94a3b8; font-size: 1.1rem; }
+
+    .shop-controls {
+      background: var(--white);
+      padding: 20px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      margin: -30px 20px 40px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+    }
+    
+    .filter-group { display: flex; gap: 10px; flex-wrap: wrap; }
+    .filter-btn {
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      background: var(--white);
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: var(--font-family);
+      transition: var(--transition);
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--primary);
+      color: var(--white);
+      border-color: var(--primary);
+    }
+
+    .search-sort-group { display: flex; gap: 15px; flex-wrap: wrap; flex: 1; justify-content: flex-end; }
+    .search-box, .sort-box {
+      padding: 10px 15px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-family);
+      outline: none;
+    }
+    .search-box { width: 100%; max-width: 250px; }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 30px;
+      padding: 0 20px 60px;
+    }
+
+    .product-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .product-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--primary); }
+    .product-img {
+      width: 100%; height: 200px;
+      background: var(--light-alt);
+      border-radius: var(--radius-sm);
+      margin-bottom: 20px;
+      display: flex; align-items: center; justify-content: center;
+      color: #94a3b8; font-size: 3rem;
+    }
+    .product-img img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
+    .product-cat { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px; }
+    .product-name { font-size: 1.1rem; color: var(--dark); margin-bottom: 15px; flex-grow: 1; }
+    .product-footer { display: flex; justify-content: space-between; align-items: flex-end; }
+    .product-price { color: var(--primary); font-size: 1.25rem; font-weight: 700; }
+    .product-stock { font-size: 0.85rem; padding: 4px 10px; border-radius: 20px; }
+    .stock-in { background: var(--success-bg); color: var(--success); }
+    .stock-low { background: var(--warning-bg); color: var(--warning); }
+    .stock-out { background: var(--danger-bg); color: var(--danger); }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(13, 27, 42, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      display: none; align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.active { display: flex; }
+    .product-modal {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      width: 100%; max-width: 900px;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      padding: 40px;
+    }
+    .modal-close {
+      position: absolute; top: 20px; right: 20px;
+      font-size: 1.5rem; color: var(--text-muted); padding: 5px; cursor: pointer;
+      background: none; border: none;
+    }
+    .pm-img {
+      width: 100%; height: 350px;
+      background: var(--light-alt);
+      border-radius: var(--radius-lg);
+      display: flex; align-items: center; justify-content: center;
+      color: #94a3b8; font-size: 4rem;
+    }
+    .pm-info h2 { font-size: 1.8rem; margin-bottom: 10px; }
+    .pm-price { font-size: 1.8rem; color: var(--primary); font-weight: 700; margin-bottom: 20px; }
+    .pm-desc { color: var(--text-muted); margin-bottom: 20px; }
+    .pm-specs {
+      background: var(--light); padding: 20px; border-radius: var(--radius-sm);
+      margin-bottom: 30px; font-size: 0.95rem;
+    }
+    .pm-specs ul { display: flex; flex-direction: column; gap: 8px; }
+    .pm-specs li { padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    .pm-specs li:last-child { border: none; padding-bottom: 0; }
+    
+    .qty-controls {
+      display: flex; align-items: center; gap: 15px; margin-bottom: 20px;
+    }
+    .qty-btn {
+      width: 40px; height: 40px; border: 1px solid var(--border);
+      background: var(--white); border-radius: var(--radius-sm);
+      font-size: 1.2rem; cursor: pointer;
+    }
+    .qty-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .qty-input { width: 60px; height: 40px; text-align: center; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 1.1rem; }
+    .add-to-cart-btn { width: 100%; padding: 15px; font-size: 1.1rem; }
+
+    @media (max-width: 768px) {
+      .shop-controls { flex-direction: column; align-items: stretch; }
+      .search-sort-group { justify-content: flex-start; }
+      .search-box, .sort-box { width: 100%; max-width: none; }
+      .product-modal { grid-template-columns: 1fr; padding: 30px 20px; gap: 20px; }
+      .pm-img { height: 250px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="navbar-placeholder"></div>
+
+  <div class="shop-header">
+    <div class="container">
+      <h1>ร้านค้าอุปกรณ์โซล่าเซลล์</h1>
+      <p>จำหน่ายแผง อินเวอร์เตอร์ แบตเตอรี่ และอุปกรณ์ครบครันคุณภาพสูง</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="shop-controls">
+      <div class="filter-group" id="filterGroup">
+        <button class="filter-btn active" data-filter="all">ทั้งหมด</button>
+        <button class="filter-btn" data-filter="แผงโซล่า">แผงโซล่า</button>
+        <button class="filter-btn" data-filter="อินเวอร์เตอร์">อินเวอร์เตอร์</button>
+        <button class="filter-btn" data-filter="แบตเตอรี่">แบตเตอรี่</button>
+        <button class="filter-btn" data-filter="สายและอุปกรณ์">สายและอุปกรณ์</button>
+        <button class="filter-btn" data-filter="ชุดสำเร็จรูป">ชุดสำเร็จรูป</button>
+      </div>
+      <div class="search-sort-group">
+        <input type="text" class="search-box" id="searchInput" placeholder="ค้นหาสินค้า...">
+        <select class="sort-box" id="sortSelect">
+          <option value="newest">ใหม่ล่าสุด</option>
+          <option value="price-asc">ราคาน้อยไปมาก</option>
+          <option value="price-desc">ราคามากไปน้อย</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="products-grid" id="productsGrid">
+      <!-- Products loaded via JS -->
+    </div>
+  </div>
+
+  <!-- Product Modal -->
+  <div class="modal-overlay" id="productModal">
+    <div class="product-modal">
+      <button class="modal-close" id="closeModal">&times;</button>
+      <div class="pm-left">
+        <div class="pm-img" id="modalImg"><i class="fas fa-image"></i></div>
+      </div>
+      <div class="pm-right">
+        <div class="pm-info">
+          <div class="product-cat" id="modalCat">หมวดหมู่</div>
+          <h2 id="modalName">ชื่อสินค้า</h2>
+          <div class="pm-price" id="modalPrice">฿0</div>
+          <div class="product-stock" id="modalStock" style="display:inline-block; margin-bottom:20px;"></div>
+          <p class="pm-desc" id="modalDesc">รายละเอียดสินค้า...</p>
+          <div class="pm-specs" id="modalSpecs">
+            <ul id="modalSpecsList"></ul>
+          </div>
+          <div class="qty-controls">
+            <button class="qty-btn" id="qtyMinus">-</button>
+            <input type="number" class="qty-input" id="qtyInput" value="1" min="1">
+            <button class="qty-btn" id="qtyPlus">+</button>
+            <span style="color:var(--text-muted); font-size:0.9rem;" id="modalStockText"></span>
+          </div>
+          <button class="btn btn-primary add-to-cart-btn" id="addToCartBtn"><i class="fas fa-cart-plus"></i> เพิ่มลงตะกร้า</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/shop.js"></script>
+</body>
+</html>

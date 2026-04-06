@@ -8,6 +8,7 @@
 
 const SHEET_NAME = 'database'; // ชื่อ Sheet ใน Google Sheets หากเปลี่ยนชื่อต้องแก้ตรงนี้ด้วย
 const CONTACT_SHEET_NAME = 'contacts'; // ชื่อ Sheet สำหรับหน้าติดต่อเรา
+const INVENTORY_SHEET_NAME = 'inventory'; // ชื่อ Sheet สำหรับคลังสินค้า (สต็อก)
 const LINE_ACCESS_TOKEN = 'XJepK/GlXhQ81kq2Fbbd21Uol3BI2ZDuxBKVfP4Xxyqrcm0NoqfhyiNolyWwsnlGIcUtxwpPcwJrSSMbK4B03GPiejFv7n+30HUNbSstKSYzwOG5vUWi03H76nuEsiUzsbNTpo4JuV4aIw5NwzWlKQdB04t89/1O/w1cDnyilFU='; // เอามาจาก LINE Developers
 const LINE_NOTIFY_TOKEN = 'YOUR_LINE_NOTIFY_TOKEN_HERE'; // ใส่ Token จาก LINE Notify สำหรับแจ้งเตือนแอดมิน
 
@@ -70,9 +71,11 @@ function doPost(e) {
         'ที่อยู่',
         'รายละเอียดสินค้า',
         'ยอดรวม (บาท)',
-        'สถานะการจัดส่ง' // คอลัมน์ที่ 9 สำหรับให้บอทอ่านไปตอบลูกค้า
+        'สถานะการจัดส่ง', // คอลัมน์ที่ 9 สำหรับให้บอทอ่านไปตอบลูกค้า
+        'จังหวัด',
+        'ค่าจัดส่ง'
       ]);
-      sheet.getRange('A1:I1').setFontWeight('bold').setBackground('#efefef');
+      sheet.getRange('A1:K1').setFontWeight('bold').setBackground('#efefef');
       sheet.setColumnWidth(1, 150);
       sheet.setColumnWidth(6, 300);
       sheet.setColumnWidth(7, 300);
@@ -139,6 +142,8 @@ function doPost(e) {
     const address_co = e.parameter.address || '-';
     const orderSummary_co = e.parameter.orderSummary || '-';
     const total_co = e.parameter.total || '0';
+    const province_co = e.parameter.province || '-';
+    const shippingFee_co = e.parameter.shippingFee || '0';
     const defaultStatus = 'ได้รับคำสั่งซื้อแล้ว (รอดำเนินการ)';
 
     // เพิ่มข้อมูลลงในแถวใหม่
@@ -151,8 +156,45 @@ function doPost(e) {
       address_co,
       orderSummary_co,
       total_co,
-      defaultStatus
+      defaultStatus,
+      province_co,      // คอลัมน์ 10 
+      shippingFee_co    // คอลัมน์ 11
     ]);
+
+    // -----------------------------------------------------
+    // ลดสต็อกสินค้าใน Sheet: inventory
+    // -----------------------------------------------------
+    try {
+      if (e.parameter.cartData) {
+        let cartItems = JSON.parse(e.parameter.cartData);
+        let invSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(INVENTORY_SHEET_NAME);
+
+        // หากไม่มี Sheet inventory ให้สร้างใหม่และใส่ค่าเริ่มต้น
+        if (!invSheet) {
+          invSheet = SpreadsheetApp.getActiveSpreadsheet().insertSheet(INVENTORY_SHEET_NAME);
+          invSheet.appendRow(['รหัสสินค้า', 'ชื่อสินค้า', 'จำนวนคงเหลือ']);
+          invSheet.getRange('A1:C1').setFontWeight('bold').setBackground('#efefef');
+          // Mock data สินค้าหลัก
+          invSheet.appendRow(['1', 'แผงโซล่าเซลล์ 230W (มือสอง)', 50]);
+        }
+
+        let invData = invSheet.getDataRange().getValues();
+        // ลูปหาและลดสต็อก
+        for (let k = 0; k < cartItems.length; k++) {
+          let orderItem = cartItems[k];
+          for (let i = 1; i < invData.length; i++) {
+            if (invData[i][0] && invData[i][0].toString() === orderItem.id.toString()) {
+              let currentStock = parseInt(invData[i][2]) || 0;
+              let newStock = Math.max(0, currentStock - orderItem.quantity);
+              invSheet.getRange(i + 1, 3).setValue(newStock);
+              break;
+            }
+          }
+        }
+      }
+    } catch (err) {
+      console.error("Inventory update error:", err.message);
+    }
 
     // ตอบกลับว่าทำงานสำเร็จ (ตอบกลับเป็น JSON)
     return ContentService
@@ -260,6 +302,28 @@ function doGet(e) {
       }
       // รีเทิร์นข้อมูลกลับโดยเรียงรายการใหม่สุดขึ้นก่อน
       return ContentService.createTextOutput(JSON.stringify(contacts.reverse())).setMimeType(ContentService.MimeType.JSON);
+    }
+
+    if (action === 'getInventory') {
+      let sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(INVENTORY_SHEET_NAME);
+      if (!sheet) {
+        // ลองสร้างจำลองตอน GET เผื่อยังไม่มี
+        sheet = SpreadsheetApp.getActiveSpreadsheet().insertSheet(INVENTORY_SHEET_NAME);
+        sheet.appendRow(['รหัสสินค้า', 'ชื่อสินค้า', 'จำนวนคงเหลือ']);
+        sheet.getRange('A1:C1').setFontWeight('bold').setBackground('#efefef');
+        sheet.appendRow(['1', 'แผงโซล่าเซลล์ 230W (มือสอง)', 50]);
+      }
+
+      const data = sheet.getDataRange().getValues();
+      const inventory = [];
+      for (let i = 1; i < data.length; i++) {
+        inventory.push({
+          id: data[i][0] ? data[i][0].toString() : '',
+          name: data[i][1] || '',
+          stock: parseInt(data[i][2]) || 0
+        });
+      }
+      return ContentService.createTextOutput(JSON.stringify(inventory)).setMimeType(ContentService.MimeType.JSON);
     }
 
     // Default GET response

@@ -62,11 +62,7 @@ function showToast(message, type = 'success') {
 
 // ── 3. Initialization & Default Data Bootstrapping ──
 function initAppData() {
-  if (!getData(LS_KEYS.products)) saveData(LS_KEYS.products, DEFAULT_PRODUCTS);
-  if (!getData(LS_KEYS.shippingConfig)) saveData(LS_KEYS.shippingConfig, DEFAULT_SHIPPING_CONFIG);
   if (!getData(LS_KEYS.siteConfig)) saveData(LS_KEYS.siteConfig, DEFAULT_SITE_CONFIG);
-  if (!getData(LS_KEYS.cart)) saveData(LS_KEYS.cart, []);
-  if (!getData(LS_KEYS.orders)) saveData(LS_KEYS.orders, []);
   if (!getData(LS_KEYS.quotes)) saveData(LS_KEYS.quotes, []);
   if (!getData(LS_KEYS.messages)) saveData(LS_KEYS.messages, []);
 }
@@ -84,11 +80,11 @@ function loadComponents() {
           <a href="index.html" class="logo">Raydee<span>Solar</span></a>
           <ul class="nav-links">
             <li><a href="index.html">หน้าหลัก</a></li>
+            <li><a href="index.html#services">บริการของเรา</a></li>
+            <li><a href="index.html#portfolio">ผลงานติดตั้ง</a></li>
             <li><a href="packages.html">แพ็คเกจติดตั้ง</a></li>
-            <li><a href="shop.html">ร้านค้าอุปกรณ์</a></li>
             <li><a href="about.html">เกี่ยวกับเรา</a></li>
             <li><a href="contact.html">ติดต่อหน้างาน</a></li>
-            <li><a href="cart.html" class="cart-nav"><i class="fas fa-shopping-cart"></i> ตะกร้า <span class="cart-badge" id="cart-count">0</span></a></li>
           </ul>
           <div class="hamburger">
             <span class="bar"></span><span class="bar"></span><span class="bar"></span>
@@ -105,7 +101,7 @@ function loadComponents() {
           <div class="footer-grid">
             <div class="footer-col">
               <h3>${siteConfig.shopName}</h3>
-              <p>ผู้นำด้านเทคโนโลยีพลังงานแสงอาทิตย์ ให้บริการครบวงจรตั้งแต่ให้คำปรึกษาจนถึงติดตั้งและบำรุงรักษา</p>
+              <p>ผู้นำด้านเทคโนโลยีพลังงานแสงอาทิตย์ ให้บริการครบวงจรตั้งแต่ให้คำปรึกษา ออกแบบ ขออนุญาต จนถึงติดตั้งและบำรุงรักษา</p>
               <div class="social-links">
                 <a href="${siteConfig.facebookUrl}" target="_blank"><i class="fab fa-facebook"></i></a>
                 <a href="${siteConfig.lineUrl}" target="_blank"><i class="fab fa-line"></i></a>
@@ -115,9 +111,9 @@ function loadComponents() {
               <h4>ลิงก์ด่วน</h4>
               <ul>
                 <li><a href="index.html">หน้าแรก</a></li>
+                <li><a href="index.html#services">บริการของเรา</a></li>
                 <li><a href="packages.html">แพ็คเกจติดตั้ง</a></li>
-                <li><a href="shop.html">สินค้าและอุปกรณ์</a></li>
-                <li><a href="quote.html">ขอใบเสนอราคา</a></li>
+                <li><a href="quote.html">ขอใบเสนอราคาฟรี</a></li>
               </ul>
             </div>
             <div class="footer-col">
@@ -139,7 +135,6 @@ function loadComponents() {
   }
 
   setupInteractions();
-  updateCartBadge();
   highlightActiveNav();
 }
 
@@ -167,19 +162,6 @@ function setupInteractions() {
   }
 }
 
-function updateCartBadge() {
-  const cartBadge = document.getElementById('cart-count');
-  if (cartBadge) {
-    const cart = getData(LS_KEYS.cart) || [];
-    const totalItems = cart.reduce((sum, item) => sum + (item.quantity || item.qty || 0), 0);
-    cartBadge.textContent = totalItems;
-    if (totalItems > 0) {
-      cartBadge.classList.add('has-items');
-    } else {
-      cartBadge.classList.remove('has-items');
-    }
-  }
-}
 
 function highlightActiveNav() {
   const currentPath = window.location.pathname.split('/').pop() || 'index.html';

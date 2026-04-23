@@ -62,7 +62,7 @@ function showToast(message, type = 'success') {
 
 // ── 3. Initialization & Default Data Bootstrapping ──
 function initAppData() {
-  if (!getData(LS_KEYS.siteConfig)) saveData(LS_KEYS.siteConfig, DEFAULT_SITE_CONFIG);
+  saveData(LS_KEYS.siteConfig, DEFAULT_SITE_CONFIG);
   if (!getData(LS_KEYS.quotes)) saveData(LS_KEYS.quotes, []);
   if (!getData(LS_KEYS.messages)) saveData(LS_KEYS.messages, []);
 }
@@ -82,9 +82,9 @@ function loadComponents() {
             <li><a href="index.html">หน้าหลัก</a></li>
             <li><a href="index.html#services">บริการของเรา</a></li>
             <li><a href="index.html#portfolio">ผลงานติดตั้ง</a></li>
-            <li><a href="packages.html">แพ็คเกจติดตั้ง</a></li>
+            <li><a href="index.html#calculator">คำนวณความคุ้มค่า</a></li>
             <li><a href="about.html">เกี่ยวกับเรา</a></li>
-            <li><a href="contact.html">ติดต่อหน้างาน</a></li>
+            <li><a href="quote.html">ขอใบเสนอราคา</a></li>
           </ul>
           <div class="hamburger">
             <span class="bar"></span><span class="bar"></span><span class="bar"></span>
@@ -112,7 +112,7 @@ function loadComponents() {
               <ul>
                 <li><a href="index.html">หน้าแรก</a></li>
                 <li><a href="index.html#services">บริการของเรา</a></li>
-                <li><a href="packages.html">แพ็คเกจติดตั้ง</a></li>
+
                 <li><a href="quote.html">ขอใบเสนอราคาฟรี</a></li>
               </ul>
             </div>
@@ -122,7 +122,6 @@ function loadComponents() {
                 <li><i class="fas fa-map-marker-alt"></i> <span>${siteConfig.address}</span></li>
                 <li><i class="fas fa-phone-alt"></i> <span>${siteConfig.phone}</span></li>
                 <li><i class="fab fa-line"></i> <span>${siteConfig.lineId}</span></li>
-                <li><i class="fas fa-envelope"></i> <span>${siteConfig.email}</span></li>
               </ul>
             </div>
           </div>
@@ -166,7 +165,7 @@ function setupInteractions() {
 function highlightActiveNav() {
   const currentPath = window.location.pathname.split('/').pop() || 'index.html';
   const navLinks = document.querySelectorAll('.nav-links a');
-  
+
   navLinks.forEach(link => {
     const href = link.getAttribute('href');
     if (href === currentPath || (href === 'index.html' && currentPath === '')) {

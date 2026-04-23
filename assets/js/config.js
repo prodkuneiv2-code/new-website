@@ -2,9 +2,7 @@
    RaydeeSolar — Configuration & Constants
    ================================================================ */
 
-// ── API Keys ──
-const GOOGLE_MAPS_API_KEY = 'YOUR_API_KEY_HERE';
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzghxato9j8nSYCILSNR3jM5wSAGGtqjw8KiaPje80ujDddL_lnSb2uyT57D4l6shg/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxiECLXcBBdCUtOj-xU8NWIe22f2jiKeaFE1aQiIGKVP07bKPnNyyN7kNZDTpTXB9Ri/exec';
 
 // ── Admin Credentials ──
 const ADMIN_USER = 'admin';
@@ -21,10 +19,9 @@ const LS_KEYS = {
 // ── Default Site Config ──
 const DEFAULT_SITE_CONFIG = {
   shopName: 'RaydeeSolar โซล่าเซลล์สระบุรี',
-  phone: '089-123-4567',
-  email: 'contact@raydeesolar.com',
-  lineId: '@raydeesolar',
-  address: '123 ถนนพหลโยธิน ตำบลปากเพรียว อำเภอเมือง จังหวัดสระบุรี 18000',
+  phone: '095-713-4153',
+  lineId: '@312ntoyv',
+  address: '59 ตำบลพุแค อำเภอเฉลิมพระเกียรติ จังหวัดสระบุรี 18240',
   bankName: 'ธนาคารกสิกรไทย',
   bankAccountName: 'บริษัท เรย์ดีโซล่า จำกัด',
   bankAccountNumber: 'XXX-X-XXXXX-X',

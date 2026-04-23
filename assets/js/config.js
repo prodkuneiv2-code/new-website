@@ -4,10 +4,6 @@
 
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxiECLXcBBdCUtOj-xU8NWIe22f2jiKeaFE1aQiIGKVP07bKPnNyyN7kNZDTpTXB9Ri/exec';
 
-// ── Admin Credentials ──
-const ADMIN_USER = 'admin';
-const ADMIN_PASS = 'solar1234';
-
 // ── localStorage Keys ──
 const LS_KEYS = {
   quotes: 'solar_quotes',

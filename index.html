@@ -886,25 +886,24 @@
   <!-- Scripts -->
   <script src="assets/js/config.js"></script>
   <script src="assets/js/main.js"></script>
-  <script src="assets/js/packages.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // Setup dynamic links
       const siteConfig = getData(LS_KEYS.siteConfig) || DEFAULT_SITE_CONFIG;
 
       // ---- Calculator Logic ----
-      const inpBill   = document.getElementById('inpBill');
-      const lblBill   = document.getElementById('lblBill');
+      const inpBill = document.getElementById('inpBill');
+      const lblBill = document.getElementById('lblBill');
       const outSystem = document.getElementById('outSystem');
-      const outSave   = document.getElementById('outSave');
-      const outCost   = document.getElementById('outCost');
-      const outROI    = document.getElementById('outROI');
-      const roiBar    = document.getElementById('roiBar');
+      const outSave = document.getElementById('outSave');
+      const outCost = document.getElementById('outCost');
+      const outROI = document.getElementById('outROI');
+      const roiBar = document.getElementById('roiBar');
 
       function calcAndRender() {
-        const bill   = parseInt(inpBill.value);
+        const bill = parseInt(inpBill.value);
         const region = document.getElementById('inpRegion').value;
-        const usage  = document.querySelector('input[name="usage"]:checked').value;
+        const usage = document.querySelector('input[name="usage"]:checked').value;
 
         // Update label with comma-formatted number
         lblBill.textContent = bill.toLocaleString('th-TH');
@@ -916,7 +915,7 @@
         const usageFactor = usage === 'day' ? 0.85 : 0.55;
 
         // Estimate monthly kWh from bill (avg unit cost ~4.5 THB/kWh)
-        const unitCost   = 4.5;
+        const unitCost = 4.5;
         const monthlyKwh = bill / unitCost;
 
         // System size (kW) needed to cover usageFactor of load
@@ -925,12 +924,12 @@
         systemKw = Math.max(3, Math.min(100, Math.round(systemKw * 2) / 2)); // round to 0.5, min 3kW
 
         // Monthly saving (solar output × unit cost)
-        const monthlyGen  = systemKw * sunHours * 30; // kWh
+        const monthlyGen = systemKw * sunHours * 30; // kWh
         const monthlySave = Math.min(monthlyGen * unitCost, bill); // ไม่เกินค่าไฟจริง
         const monthlySaveRounded = Math.round(monthlySave / 100) * 100;
 
         // Installation cost: ~25,000–30,000 THB/kW (rough Thai market rate)
-        const costLow  = Math.round(systemKw * 25000 / 1000) * 1000;
+        const costLow = Math.round(systemKw * 25000 / 1000) * 1000;
         const costHigh = Math.round(systemKw * 30000 / 1000) * 1000;
 
         // ROI in years
@@ -944,10 +943,10 @@
 
         // Render
         outSystem.textContent = systemKw % 1 === 0 ? systemKw : systemKw.toFixed(1);
-        outSave.textContent   = monthlySaveRounded.toLocaleString('th-TH');
-        outCost.textContent   = `${costLow.toLocaleString('th-TH')} - ${costHigh.toLocaleString('th-TH')}`;
-        outROI.textContent    = roiRounded;
-        roiBar.style.width    = roiPct + '%';
+        outSave.textContent = monthlySaveRounded.toLocaleString('th-TH');
+        outCost.textContent = `${costLow.toLocaleString('th-TH')} - ${costHigh.toLocaleString('th-TH')}`;
+        outROI.textContent = roiRounded;
+        roiBar.style.width = roiPct + '%';
       }
 
       // Bind events
